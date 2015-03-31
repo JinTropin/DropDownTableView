@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF72271AC30842004A1113 /* AppDelegate.swift */; };
-		B5BF722A1AC30842004A1113 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF72291AC30842004A1113 /* ViewController.swift */; };
 		B5BF722D1AC30842004A1113 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722B1AC30842004A1113 /* Main.storyboard */; };
 		B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722E1AC30842004A1113 /* Images.xcassets */; };
 		B5BF72321AC30842004A1113 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5BF72301AC30842004A1113 /* LaunchScreen.xib */; };
 		B5BF723E1AC30842004A1113 /* DropDownTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF723D1AC30842004A1113 /* DropDownTableViewTests.swift */; };
+		B5BF724C1AC309E6004A1113 /* DropDownTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF724B1AC309E6004A1113 /* DropDownTableViewController.swift */; };
+		B5BF724E1AC322CD004A1113 /* up_disclosure_indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = B5BF724D1AC322CD004A1113 /* up_disclosure_indicator.png */; };
+		B5BF72501AC322E4004A1113 /* down_disclosure_indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = B5BF724F1AC322E4004A1113 /* down_disclosure_indicator.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +31,15 @@
 		B5BF72221AC30842004A1113 /* DropDownTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DropDownTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BF72261AC30842004A1113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5BF72271AC30842004A1113 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5BF72291AC30842004A1113 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5BF722C1AC30842004A1113 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5BF722E1AC30842004A1113 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B5BF72311AC30842004A1113 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B5BF72371AC30842004A1113 /* DropDownTableViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropDownTableViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BF723C1AC30842004A1113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5BF723D1AC30842004A1113 /* DropDownTableViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTableViewTests.swift; sourceTree = "<group>"; };
+		B5BF724B1AC309E6004A1113 /* DropDownTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewController.swift; sourceTree = "<group>"; };
+		B5BF724D1AC322CD004A1113 /* up_disclosure_indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up_disclosure_indicator.png; sourceTree = "<group>"; };
+		B5BF724F1AC322E4004A1113 /* down_disclosure_indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_disclosure_indicator.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				B5BF72271AC30842004A1113 /* AppDelegate.swift */,
-				B5BF72291AC30842004A1113 /* ViewController.swift */,
+				B5BF724B1AC309E6004A1113 /* DropDownTableViewController.swift */,
 				B5BF722B1AC30842004A1113 /* Main.storyboard */,
 				B5BF722E1AC30842004A1113 /* Images.xcassets */,
 				B5BF72301AC30842004A1113 /* LaunchScreen.xib */,
@@ -90,6 +94,8 @@
 		B5BF72251AC30842004A1113 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B5BF724D1AC322CD004A1113 /* up_disclosure_indicator.png */,
+				B5BF724F1AC322E4004A1113 /* down_disclosure_indicator.png */,
 				B5BF72261AC30842004A1113 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -193,8 +199,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5BF722D1AC30842004A1113 /* Main.storyboard in Resources */,
+				B5BF72501AC322E4004A1113 /* down_disclosure_indicator.png in Resources */,
 				B5BF72321AC30842004A1113 /* LaunchScreen.xib in Resources */,
 				B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */,
+				B5BF724E1AC322CD004A1113 /* up_disclosure_indicator.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5BF722A1AC30842004A1113 /* ViewController.swift in Sources */,
+				B5BF724C1AC309E6004A1113 /* DropDownTableViewController.swift in Sources */,
 				B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +415,7 @@
 				B5BF72431AC30842004A1113 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B5BF72441AC30842004A1113 /* Build configuration list for PBXNativeTarget "DropDownTableViewTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +424,7 @@
 				B5BF72461AC30842004A1113 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
