@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5B22A391ACB0BAD00974ED5 /* DropDownTableView.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5B22A381ACB0BAD00974ED5 /* DropDownTableView.gif */; };
 		B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF72271AC30842004A1113 /* AppDelegate.swift */; };
 		B5BF722D1AC30842004A1113 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722B1AC30842004A1113 /* Main.storyboard */; };
 		B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722E1AC30842004A1113 /* Images.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B5B22A381ACB0BAD00974ED5 /* DropDownTableView.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = DropDownTableView.gif; sourceTree = "<group>"; };
 		B5BF72221AC30842004A1113 /* DropDownTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DropDownTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BF72261AC30842004A1113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5BF72271AC30842004A1113 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		B5BF72251AC30842004A1113 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B5B22A381ACB0BAD00974ED5 /* DropDownTableView.gif */,
 				B5BF724D1AC322CD004A1113 /* up_disclosure_indicator.png */,
 				B5BF724F1AC322E4004A1113 /* down_disclosure_indicator.png */,
 				B5BF72261AC30842004A1113 /* Info.plist */,
@@ -201,6 +204,7 @@
 				B5BF722D1AC30842004A1113 /* Main.storyboard in Resources */,
 				B5BF72501AC322E4004A1113 /* down_disclosure_indicator.png in Resources */,
 				B5BF72321AC30842004A1113 /* LaunchScreen.xib in Resources */,
+				B5B22A391ACB0BAD00974ED5 /* DropDownTableView.gif in Resources */,
 				B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */,
 				B5BF724E1AC322CD004A1113 /* up_disclosure_indicator.png in Resources */,
 			);
