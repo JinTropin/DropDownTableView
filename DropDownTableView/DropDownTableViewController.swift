@@ -52,6 +52,15 @@ extension NSDictionary {
         }
         return nil
     }
+    
+    func lengthOfValue(index : Int) -> Int {
+        
+        if let value = self.valueAtIndex(index) {
+            
+            return value.count
+        }
+        return 0
+    }
 }
 
 class DropDownTableViewController: UITableViewController {
@@ -64,15 +73,13 @@ class DropDownTableViewController: UITableViewController {
 
     var numberOfRows : Int = 0
     
-    let lengthOfDetailedSection : [Int] = []
-    
     var indexSetForMainCells : NSIndexSet {
         
         if let selectedRow = self.selectedIndexPath?.row {
             
             let indexSet = NSMutableIndexSet(indexesInRange: NSMakeRange(0, selectedRow + 1))
             
-            let offset = self.lengthOfDetailedSection[selectedRow]
+            let offset = self.data.lengthOfValue(selectedRow)
             
             for var index = selectedRow + offset + 1; index < self.numberOfRows; index++ {
                 
@@ -101,11 +108,6 @@ class DropDownTableViewController: UITableViewController {
         super.init(coder: aDecoder)
         
         self.numberOfRows = self.data.count
-        
-        for (_, value) in self.data {
-            
-            self.lengthOfDetailedSection.append(value.count)
-        }
     }
     
     override func viewDidLoad() {
@@ -161,7 +163,7 @@ class DropDownTableViewController: UITableViewController {
         let highlightedCell = tableView.cellForRowAtIndexPath(indexPath)
         highlightedCell?.accessoryView = UIImageView(image: UIImage(named: "down_disclosure_indicator"))
         
-        let length = self.lengthOfDetailedSection[indexPath.row]
+        let length = self.data.lengthOfValue(indexPath.row)
         
         self.numberOfRows -= length
         
@@ -179,7 +181,7 @@ class DropDownTableViewController: UITableViewController {
         highlightedCell?.accessoryView = UIImageView(image: UIImage(named: "up_disclosure_indicator"))
         
         let selectedRow = indexPath.row
-        let length = self.lengthOfDetailedSection[indexPath.row]
+        let length = self.data.lengthOfValue(indexPath.row)
         
         self.numberOfRows += length
         
