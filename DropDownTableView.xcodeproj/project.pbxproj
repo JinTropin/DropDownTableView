@@ -60,11 +60,11 @@
 			children = (
 				B5BF72271AC30842004A1113 /* AppDelegate.swift */,
 				B5BF724B1AC309E6004A1113 /* DropDownTableViewController.swift */,
+				B5DF89611BEA558A006C1407 /* TableViewController.swift */,
 				B5BF722B1AC30842004A1113 /* Main.storyboard */,
 				B5BF722E1AC30842004A1113 /* Images.xcassets */,
 				B5BF72301AC30842004A1113 /* LaunchScreen.xib */,
 				B5BF72251AC30842004A1113 /* Supporting Files */,
-				B5DF89611BEA558A006C1407 /* TableViewController.swift */,
 			);
 			path = DropDownTableView;
 			sourceTree = "<group>";
