@@ -7,6 +7,8 @@ Here is a drop-down TableView. It shows JSON-like data.
 
 Inherit form `DropDownTableViewController` and override methods from `DropDownTableViewDataSource` and `DropDownTableViewDelegate`.
 
+This is alpha version, and it has some bugs and incomplete implementation.
 
+I am awaiting for your comments.
 
 ![Alt text](https://raw.githubusercontent.com/NSSimpleApps/DropDownTableView/master/DropDownTableView/DropDownTable.gif)
