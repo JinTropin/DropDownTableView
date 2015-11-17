@@ -321,7 +321,35 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     
     override final func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        // this is not implemented, yet...
+        let row = indexPath.row
+        
+        if self.previousSubrows.contains(row) {
+            
+            self.tableView(tableView, didEndDisplayingCell: cell, forSubrow: row - self.previousSubrows.first!, row: self.previousSubrows.first! - 1)
+            
+        } else if row < self.previousSubrows.first {
+            
+            self.tableView(tableView, didEndDisplayingCell: cell, forRow: row)
+            
+        } else {
+            
+            self.tableView(tableView, didEndDisplayingCell: cell, forRow: row - self.previousSubrows.count)
+        }
+        
+        /*let row = indexPath.row
+        
+        if self.previousSubrows.contains(row) {
+            
+            self.tableView(tableView, didEndDisplayingCell: cell, forSubrow: row - self.previousSubrows.first!, row: self.previousSubrows.first! - 1)
+            
+        } else {
+            
+            let mainRows = self.mainRows(self.numberOfRowsInTableView(tableView) + self.previousSubrows.count)
+            
+            let index = mainRows.indexOf(row)!
+            
+            self.tableView(tableView, didEndDisplayingCell: cell, forRow: index)
+        }*/
     }
     
     // ****************
@@ -347,13 +375,25 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     // ****************
     func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat {
         
-        return 44
+        var indexPath: NSIndexPath!
+        
+        if row < self.subrows.first {
+            
+            indexPath = NSIndexPath(forRow: row, inSection: 0)
+        } else {
+            
+            indexPath = NSIndexPath(forRow: row - self.subrows.count, inSection: 0)
+        }
+        
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
     
     // ****************
     func tableView(tableView: UITableView, heightForSubrow subrow: Int, row: Int) -> CGFloat {
         
-        return 44
+        return super.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forRow: row + subrow + 1, inSection: 0))
+        
+        //return 44
     }
     
     override final func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -587,6 +627,8 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
                 cell.accessoryView = self.tableView(tableView, accessoryViewForSelectedRow: row)
             }
             
+            tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.None)
+            
         } else {
             
             self.previousSubrows = self.subrows
@@ -602,8 +644,11 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
                 
                 cell.accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: row)
             }
+            
+            tableView.deselectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true)
+            
         }
-        tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.None)
+        
         self.tableView(tableView, didSelectRow: row)
     }
     
