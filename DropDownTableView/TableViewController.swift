@@ -12,18 +12,13 @@ class TableViewController: DropDownTableViewController {
     
     let subTitles = ["Capital", "Square", "Independence Day"]
     
-    let data = [
-        
-        ["Russia", "Moscow", "17 098 242"],
-        
-        ["USA", "Washington, D.C.", "9 857 306", "July 4"],
-        
-        [ "Zimbabwe", "Harare"] ]
+    let data = [["Russia", "Moscow", "17 098 242"],
+                ["USA", "Washington, D.C.", "9 857 306", "July 4"],
+                ["Zimbabwe", "Harare"]]
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,5 +63,15 @@ class TableViewController: DropDownTableViewController {
     override func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView? {
         
         return UIImageView(image: UIImage(named: "deselectedImage"))
+    }
+    
+    override func tableView(tableView: UITableView, indentationLevelForRow row: Int) -> Int {
+        
+        return 0
+    }
+    
+    override func tableView(tableView: UITableView, indentationLevelForSubrow subrow: Int, row: Int) -> Int {
+        
+        return 3
     }
 }
