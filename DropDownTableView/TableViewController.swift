@@ -61,7 +61,7 @@ class TableViewController: DropDownTableViewController {
     }
     
     override func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView? {
-        
+                
         return UIImageView(image: UIImage(named: "deselectedImage"))
     }
     
@@ -73,5 +73,15 @@ class TableViewController: DropDownTableViewController {
     override func tableView(tableView: UITableView, indentationLevelForSubrow subrow: Int, row: Int) -> Int {
         
         return 3
+    }
+    
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRow row: Int) {
+        
+        print(cell.textLabel?.text)
+    }
+    
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forSubrow subrow: Int, row: Int) {
+        
+        print(cell.textLabel?.text, cell.detailTextLabel?.text)
     }
 }

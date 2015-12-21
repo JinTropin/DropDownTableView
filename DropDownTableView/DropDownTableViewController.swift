@@ -27,14 +27,7 @@ import UIKit
 //
 ////////////////////////////////////////////////
 
-extension Array where Element: IntegerType {
-    
-    func subtract(other: Array) -> Array {
-        
-        return Set(self).subtract(Set(other)).sort()
-    }
-}
-
+@available(iOS 6.0, *)
 @objc protocol DropDownTableViewDataSource : NSObjectProtocol {
     
     func numberOfRowsInTableView(tableView: UITableView) -> Int // Default is 0
@@ -54,6 +47,7 @@ extension Array where Element: IntegerType {
     optional func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView?  // Default is nil
 }
 
+@available(iOS 6.0, *)
 @objc protocol DropDownTableViewDelegate : NSObjectProtocol {
     
     optional func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int)
@@ -80,12 +74,16 @@ extension Array where Element: IntegerType {
     
     optional func heightForFooterInTableView(tableView: UITableView) -> CGFloat
     
+    @available(iOS 7.0, *)
     optional func tableView(tableView: UITableView, estimatedHeightForRow row: Int) -> CGFloat
     
+    @available(iOS 7.0, *)
     optional func tableView(tableView: UITableView, estimatedHeightForSubrow subrow: Int, row: Int) -> CGFloat
     
+    @available(iOS 7.0, *)
     optional func estimatedHeightForHeaderInTableView(tableView: UITableView) -> CGFloat
     
+    @available(iOS 7.0, *)
     optional func estimatedHeightForFooterInTableView(tableView: UITableView) -> CGFloat
     
     optional func viewForHeaderInTableView(tableView: UITableView) -> UIView?
@@ -113,11 +111,14 @@ extension Array where Element: IntegerType {
     optional func tableView(tableView: UITableView, indentationLevelForSubrow subrow: Int, row: Int) -> Int
 }
 
+private var ddRow: UInt8 = 0
+private var ddSubrow: UInt8 = 0
+
+@available(iOS 6.0, *)
 class DropDownTableViewController: UITableViewController, DropDownTableViewDataSource, DropDownTableViewDelegate {
     
     private var subrows = [Int]()
-    private var deselectedRow: Int?
-    private var deletedCount: Int?
+    private var selectedRow: Int?
     
     override final func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
@@ -143,6 +144,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         return 0
     }
     
+    // ****************
     func tableView(tableView: UITableView, cellForRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {
         
         fatalError(__FUNCTION__ + " has not been implemented")
@@ -169,7 +171,14 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         
         if self.subrows.contains(row) {
             
-            return self.tableView(tableView, cellForSubrow: row - self.subrows.first!, row: self.subrows.first! - 1, indexPath: indexPath)
+            let cellForSubrow = self.tableView(tableView, cellForSubrow: row - self.subrows.first!, row: self.subrows.first! - 1, indexPath: indexPath)
+            
+            objc_setAssociatedObject(cellForSubrow,
+                &ddRow, self.subrows.first! - 1, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(cellForSubrow,
+                &ddSubrow, row - self.subrows.first!, .OBJC_ASSOCIATION_ASSIGN)
+            
+            return cellForSubrow
             
         } else {
             
@@ -181,6 +190,11 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
             }
             
             let cellForRow = self.tableView(tableView, cellForRow: index, indexPath: indexPath)
+            
+            objc_setAssociatedObject(cellForRow,
+                &ddRow, index, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(cellForRow,
+                &ddSubrow, nil, .OBJC_ASSOCIATION_ASSIGN)
             
             let accessoryViewForSelectedRow = self.tableView(tableView, accessoryViewForSelectedRow: index)
             
@@ -261,7 +275,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         
         
     }
-        
+    
     // DropDownTableViewDelegate implementation
     
     // ****************
@@ -301,7 +315,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     }
     
     override final func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-            
+        
         self.tableView(tableView, willDisplayHeaderView: view)
     }
     
@@ -311,7 +325,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     }
     
     override final func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-            
+        
         self.tableView(tableView, willDisplayFooterView: view)
     }
     
@@ -329,9 +343,19 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         
         // this function is not implemented... yet
         
+        let row = objc_getAssociatedObject(cell, &ddRow) as! Int
+        
+        if let subrow = objc_getAssociatedObject(cell, &ddSubrow) as? Int {
+            
+            self.tableView(tableView, didEndDisplayingCell: cell, forSubrow: subrow, row: row)
+        } else {
+            
+            self.tableView(tableView, didEndDisplayingCell: cell, forRow: row)
+        }
+        
         //let row = indexPath.row
         
-        //print("row = ", row)
+        //print(row, self.subrows)
     }
     
     // ****************
@@ -340,7 +364,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     }
     
     override final func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-            
+        
         self.tableView(tableView, didEndDisplayingHeaderView: view)
     }
     
@@ -350,7 +374,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     }
     
     override final func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-            
+        
         self.tableView(tableView, didEndDisplayingFooterView: view)
     }
     
@@ -606,17 +630,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         
         var row = indexPath.row
         
-        if self.deselectedRow != nil && self.deletedCount != nil {
-            
-            if row > self.deselectedRow! {
-                
-                row -= self.deletedCount!
-            }
-            self.deselectedRow = nil
-            self.deletedCount = nil
-        }
-        
-        if self.subrows.isEmpty {
+        if self.selectedRow == nil { // subrows should be inserted into row
             
             let count = self.tableView(tableView, numberOfSubrowsInRow : row)
             
@@ -631,10 +645,11 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
                 
                 cell.accessoryView = self.tableView(tableView, accessoryViewForSelectedRow: row)
             }
-            
             tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.None)
             
-        } else {
+            self.selectedRow = row
+            
+        } else if self.selectedRow! == row { // subrows should be deleted from row
             
             for index in self.subrows.reverse() {
                 
@@ -647,21 +662,35 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
                 
                 cell.accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: row)
             }
-            
             tableView.deselectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true)
             
-        }
-        self.tableView(tableView, didSelectRow: row)
-        
-        
-        /*var row = indexPath.row
-        
-        if self.previousSubrows.last < row {
+            self.selectedRow = nil
             
-            row -= self.previousSubrows.count
-        }
-        
-        if self.subrows.isEmpty {
+        } else { // subrows should be deleted from row and inserted into (row - deletedCount)
+            
+            let deletedCount = self.subrows.count
+            
+            for index in self.subrows.reverse() {
+                
+                self.subrows.removeLast()
+                
+                tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+            }
+            
+            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: self.selectedRow!, inSection: 0)) {
+                
+                if let accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: self.selectedRow!) {
+                    
+                    cell.accessoryView = accessoryView
+                }
+            }
+            tableView.deselectRowAtIndexPath(NSIndexPath(forRow: self.selectedRow!, inSection: 0), animated: true)
+            
+            
+            if row > self.selectedRow! {
+                
+                row -= deletedCount
+            }
             
             let count = self.tableView(tableView, numberOfSubrowsInRow : row)
             
@@ -671,35 +700,15 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
                 
                 tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
             }
-            self.previousSubrows = []
             
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) {
                 
                 cell.accessoryView = self.tableView(tableView, accessoryViewForSelectedRow: row)
             }
-            
             tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.None)
             
-        } else {
-            
-            self.previousSubrows = self.subrows
-            
-            for index in self.subrows.reverse() {
-                
-                self.subrows.removeLast()
-                
-                tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
-            }
-            
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) {
-                
-                cell.accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: row)
-            }
-            
-            tableView.deselectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true)
-            
+            self.selectedRow = row
         }
-        self.tableView(tableView, didSelectRow: row)*/
     }
     
     func tableView(tableView: UITableView, didDeselectRow row: Int) {
@@ -711,44 +720,13 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         
         let row = indexPath.row
         
-        self.deselectedRow = row
-        self.deletedCount = self.subrows.count
-        
-        for index in self.subrows.reverse() {
+        var index = row
             
-            self.subrows.removeLast()
-            
-            tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
+        if index > self.subrows.last {
+                
+            index -= self.subrows.count
         }
-        
-        if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) {
-            
-            cell.accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: row)
-        }
-        self.tableView(tableView, didDeselectRow: row)
-        
-        
-        /*var row = indexPath.row
-        
-        if self.subrows.last < row {
-            
-            row -= self.subrows.count
-        }
-        
-        self.previousSubrows = self.subrows
-        
-        for index in self.subrows.reverse() {
-            
-            self.subrows.removeLast()
-            
-            tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Automatic)
-        }
-        
-        if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) {
-            
-            cell.accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: row)
-        }
-        self.tableView(tableView, didDeselectRow: row)*/
+        self.tableView(tableView, didDeselectRow: index)
     }
     
     override final func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
@@ -783,7 +761,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         
         // may be, it will be reimplemented in future
     }
-
+    
     override final func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
         
         // may be, it will be reimplemented in future
@@ -838,7 +816,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         
         return false
     }
-
+    
     override final func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
         
         // may be, it will be reimplemented in future
