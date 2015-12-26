@@ -125,6 +125,32 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         return 1
     }
     
+    func cellForRow(row: Int) -> UITableViewCell? {
+        
+        if row < self.subrows.first {
+            
+            return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0))
+            
+        } else {
+            
+            return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row + self.subrows.count, inSection: 0))
+        }
+    }
+    
+    func cellForSubrow(subrow: Int, row: Int) -> UITableViewCell? {
+        
+        guard subrow <= (self.subrows.count - 1) else {
+            
+            return nil
+        }
+        
+        if row + 1 == self.subrows.first {
+            
+            return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row + subrow + 1, inSection: 0))
+        }
+        return nil
+    }
+    
     // DropDownTableViewDataSource implementation
     
     // ****************
