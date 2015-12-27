@@ -8,6 +8,6 @@ Pod::Spec.new do |s|
     s.author       = { 'NSSimpleApps, Sergey Poluyanov' => 'ns.simple.apps@gmail.com' }
     s.source       = { :git => "https://github.com/NSSimpleApps/DropDownTableView.git", :tag => s.version.to_s }
     s.requires_arc = true
-    s.ios.deployment_target = "7.0"
+    s.ios.deployment_target = "8.0"
     s.source_files = "Source/DropDownTableViewController.swift"
 end

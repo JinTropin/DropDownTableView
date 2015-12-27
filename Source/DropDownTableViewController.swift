@@ -27,7 +27,7 @@ import UIKit
 //
 ////////////////////////////////////////////////
 
-@available(iOS 7.0, *)
+@available(iOS 8.0, *)
 @objc protocol DropDownTableViewDataSource : NSObjectProtocol {
     
     func numberOfRowsInTableView(tableView: UITableView) -> Int // Default is 0
@@ -47,7 +47,7 @@ import UIKit
     optional func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView?  // Default is nil
 }
 
-@available(iOS 7.0, *)
+@available(iOS 8.0, *)
 @objc protocol DropDownTableViewDelegate : NSObjectProtocol {
     
     optional func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int)
@@ -110,7 +110,7 @@ import UIKit
 private var ddRow: UInt8 = 0
 private var ddSubrow: UInt8 = 0
 
-@available(iOS 7.0, *)
+@available(iOS 8.0, *)
 class DropDownTableViewController: UITableViewController, DropDownTableViewDataSource, DropDownTableViewDelegate {
     
     private var subrows = [Int]()
@@ -851,6 +851,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         // may be, it will be reimplemented in future
     }
     
+    @available(iOS 9.0, *)
     override final func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         // may be, it will be reimplemented in future
@@ -858,6 +859,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         return true
     }
     
+    @available(iOS 9.0, *)
     override final func tableView(tableView: UITableView, shouldUpdateFocusInContext context: UITableViewFocusUpdateContext) -> Bool {
         
         // may be, it will be reimplemented in future
@@ -865,11 +867,13 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         return true
     }
     
+    @available(iOS 9.0, *)
     override final func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
         
         // may be, it will be reimplemented in future
     }
     
+    @available(iOS 9.0, *)
     override final func indexPathForPreferredFocusedViewInTableView(tableView: UITableView) -> NSIndexPath? {
         
         // may be, it will be reimplemented in future
