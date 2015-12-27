@@ -853,9 +853,9 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     
     @available(iOS 9.0, *)
     override final func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        
+    
         // may be, it will be reimplemented in future
-        
+    
         return true
     }
     
