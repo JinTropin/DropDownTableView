@@ -2,7 +2,7 @@
 //  TestViewController.swift
 //  DropDownTableView
 //
-//  Created by neo on 26.12.15.
+//  Created by NSSimpleApps on 26.12.15.
 //  Copyright © 2015 NSSimpleApps. All rights reserved.
 //
 

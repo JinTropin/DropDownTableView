@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B5295F841BF8AEA100305D4F /* DropDownTable.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5295F831BF8AEA100305D4F /* DropDownTable.gif */; };
 		B53586B71C2ECBFB005D58EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53586B61C2ECBFB005D58EE /* TestViewController.swift */; };
+		B53586DF1C2EF661005D58EE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B53586DE1C2EF661005D58EE /* README.md */; };
+		B53FB46A1C2FA7060019DDC9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B53FB4691C2FA7060019DDC9 /* LICENSE */; };
 		B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF72271AC30842004A1113 /* AppDelegate.swift */; };
 		B5BF722D1AC30842004A1113 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722B1AC30842004A1113 /* Main.storyboard */; };
 		B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722E1AC30842004A1113 /* Images.xcassets */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		B5295F831BF8AEA100305D4F /* DropDownTable.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = DropDownTable.gif; sourceTree = "<group>"; };
 		B53586B61C2ECBFB005D58EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		B53586DE1C2EF661005D58EE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		B53FB4691C2FA7060019DDC9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B5BF72221AC30842004A1113 /* DropDownTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DropDownTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BF72261AC30842004A1113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5BF72271AC30842004A1113 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +48,8 @@
 		B5BF72191AC30841004A1113 = {
 			isa = PBXGroup;
 			children = (
+				B53FB4691C2FA7060019DDC9 /* LICENSE */,
+				B53586DE1C2EF661005D58EE /* README.md */,
 				B5BF72241AC30842004A1113 /* DropDownTableView */,
 				B5BF72231AC30842004A1113 /* Products */,
 			);
@@ -144,6 +150,7 @@
 				B5BF72321AC30842004A1113 /* LaunchScreen.xib in Resources */,
 				B5295F841BF8AEA100305D4F /* DropDownTable.gif in Resources */,
 				B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */,
+				B53FB46A1C2FA7060019DDC9 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +163,7 @@
 			files = (
 				B5BF724C1AC309E6004A1113 /* DropDownTableViewController.swift in Sources */,
 				B5DF89621BEA558A006C1407 /* TableViewController.swift in Sources */,
+				B53586DF1C2EF661005D58EE /* README.md in Sources */,
 				B53586B71C2ECBFB005D58EE /* TestViewController.swift in Sources */,
 				B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */,
 			);

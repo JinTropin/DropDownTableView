@@ -5,7 +5,7 @@ Here is a drop-down TableView. It shows JSON-like data.
 "USA" : ["capital" : "Washington, D.C.", "Independence Day" : "July 4", "square" : "9 857 306"],
 "Zimbabwe" : ["capital" : "Harare"]]
 
-Inherit form `DropDownTableViewController` and override methods from `DropDownTableViewDataSource` and `DropDownTableViewDelegate`.
+Inherit from `DropDownTableViewController` and override methods from `DropDownTableViewDataSource` and `DropDownTableViewDelegate`.
 
 This is alpha version, and it has some bugs and incomplete implementation.
 

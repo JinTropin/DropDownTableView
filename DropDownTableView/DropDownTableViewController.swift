@@ -27,7 +27,7 @@ import UIKit
 //
 ////////////////////////////////////////////////
 
-@available(iOS 6.0, *)
+@available(iOS 7.0, *)
 @objc protocol DropDownTableViewDataSource : NSObjectProtocol {
     
     func numberOfRowsInTableView(tableView: UITableView) -> Int // Default is 0
@@ -47,7 +47,7 @@ import UIKit
     optional func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView?  // Default is nil
 }
 
-@available(iOS 6.0, *)
+@available(iOS 7.0, *)
 @objc protocol DropDownTableViewDelegate : NSObjectProtocol {
     
     optional func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int)
@@ -74,16 +74,12 @@ import UIKit
     
     optional func heightForFooterInTableView(tableView: UITableView) -> CGFloat
     
-    @available(iOS 7.0, *)
     optional func tableView(tableView: UITableView, estimatedHeightForRow row: Int) -> CGFloat
     
-    @available(iOS 7.0, *)
     optional func tableView(tableView: UITableView, estimatedHeightForSubrow subrow: Int, row: Int) -> CGFloat
     
-    @available(iOS 7.0, *)
     optional func estimatedHeightForHeaderInTableView(tableView: UITableView) -> CGFloat
     
-    @available(iOS 7.0, *)
     optional func estimatedHeightForFooterInTableView(tableView: UITableView) -> CGFloat
     
     optional func viewForHeaderInTableView(tableView: UITableView) -> UIView?
@@ -114,7 +110,7 @@ import UIKit
 private var ddRow: UInt8 = 0
 private var ddSubrow: UInt8 = 0
 
-@available(iOS 6.0, *)
+@available(iOS 7.0, *)
 class DropDownTableViewController: UITableViewController, DropDownTableViewDataSource, DropDownTableViewDelegate {
     
     private var subrows = [Int]()
