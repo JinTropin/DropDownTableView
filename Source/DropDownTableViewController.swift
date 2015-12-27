@@ -27,8 +27,8 @@ import UIKit
 //
 ////////////////////////////////////////////////
 
-@available(iOS 8.0, *)
-@objc protocol DropDownTableViewDataSource : NSObjectProtocol {
+@available(iOS 7.0, *)
+@objc public protocol DropDownTableViewDataSource : NSObjectProtocol {
     
     func numberOfRowsInTableView(tableView: UITableView) -> Int // Default is 0
     
@@ -47,8 +47,8 @@ import UIKit
     optional func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView?  // Default is nil
 }
 
-@available(iOS 8.0, *)
-@objc protocol DropDownTableViewDelegate : NSObjectProtocol {
+@available(iOS 7.0, *)
+@objc public protocol DropDownTableViewDelegate : NSObjectProtocol {
     
     optional func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int)
     
@@ -110,18 +110,18 @@ import UIKit
 private var ddRow: UInt8 = 0
 private var ddSubrow: UInt8 = 0
 
-@available(iOS 8.0, *)
-class DropDownTableViewController: UITableViewController, DropDownTableViewDataSource, DropDownTableViewDelegate {
+@available(iOS 7.0, *)
+public class DropDownTableViewController: UITableViewController, DropDownTableViewDataSource, DropDownTableViewDelegate {
     
     private var subrows = [Int]()
     private var selectedRow: Int?
     
-    override final func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override public final func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return 1
     }
     
-    func cellForRow(row: Int) -> UITableViewCell? {
+    public func cellForRow(row: Int) -> UITableViewCell? {
         
         if row < self.subrows.first {
             
@@ -133,7 +133,7 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    func cellForSubrow(subrow: Int, row: Int) -> UITableViewCell? {
+    public func cellForSubrow(subrow: Int, row: Int) -> UITableViewCell? {
         
         guard subrow <= (self.subrows.count - 1) else {
             
@@ -150,44 +150,44 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     // DropDownTableViewDataSource implementation
     
     // ****************
-    func numberOfRowsInTableView(tableView: UITableView) -> Int {
+    public func numberOfRowsInTableView(tableView: UITableView) -> Int {
         
         return 0
     }
     
-    override final func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public final func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.numberOfRowsInTableView(tableView) + self.subrows.count
     }
     
     // ****************
-    func tableView(tableView: UITableView, numberOfSubrowsInRow row: Int) -> Int {
+    public func tableView(tableView: UITableView, numberOfSubrowsInRow row: Int) -> Int {
         
         return 0
     }
     
     // ****************
-    func tableView(tableView: UITableView, cellForRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(tableView: UITableView, cellForRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {
         
         fatalError(__FUNCTION__ + " has not been implemented")
     }
     
-    func tableView(tableView: UITableView, cellForSubrow subrow: Int, row: Int, indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(tableView: UITableView, cellForSubrow subrow: Int, row: Int, indexPath: NSIndexPath) -> UITableViewCell {
         
         fatalError(__FUNCTION__ + " has not been implemented")
     }
     
-    func tableView(tableView: UITableView, accessoryViewForSelectedRow row: Int) -> UIView? {
+    public func tableView(tableView: UITableView, accessoryViewForSelectedRow row: Int) -> UIView? {
         
         return nil
     }
     
-    func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView? {
+    public func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView? {
         
         return nil
     }
     
-    override final func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override public final func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let row = indexPath.row
         
@@ -239,61 +239,61 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     }
     
     // ****************
-    func titleForHeaderInTableView(tableView: UITableView) -> String? {
+    public func titleForHeaderInTableView(tableView: UITableView) -> String? {
         
         return super.tableView(tableView, titleForHeaderInSection: 0)
     }
     
-    override final func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override public final func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return self.titleForHeaderInTableView(tableView)
     }
     
     // ****************
-    func titleForFooterInTableView(tableView: UITableView) -> String? {
+    public func titleForFooterInTableView(tableView: UITableView) -> String? {
         
         return super.tableView(tableView, titleForFooterInSection: 0)
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         return self.titleForFooterInTableView(tableView)
     }
     
-    override final func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override public final func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         // may be, it will be reimplemented in future
         
         return false
     }
     
-    override final func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override public final func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         // may be, it will be reimplemented in future
         
         return false
     }
     
-    override final func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    override public final func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         
         // may be, it will be reimplemented in future
         
         return nil
     }
     
-    override final func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    override public final func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         
         // may be, it will be reimplemented in future
         
         return 0
     }
     
-    override final func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         
     }
     
-    override final func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
         
     }
@@ -301,16 +301,16 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     // DropDownTableViewDelegate implementation
     
     // ****************
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int) {
+    public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int) {
         
     }
     
     // ****************
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forSubrow subrow: Int, row: Int) {
+    public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forSubrow subrow: Int, row: Int) {
         
     }
     
-    override final func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         let row = indexPath.row
         
@@ -332,36 +332,36 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     }
     
     // ****************
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView) {
+    public func tableView(tableView: UITableView, willDisplayHeaderView view: UIView) {
         
     }
     
-    override final func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    override public final func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         self.tableView(tableView, willDisplayHeaderView: view)
     }
     
     // ****************
-    func tableView(tableView: UITableView, willDisplayFooterView view: UIView) {
+    public func tableView(tableView: UITableView, willDisplayFooterView view: UIView) {
         
     }
     
-    override final func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+    override public final func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         
         self.tableView(tableView, willDisplayFooterView: view)
     }
     
     // ****************
-    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRow row: Int) {
+    public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRow row: Int) {
         
     }
     
     // ****************
-    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forSubrow subrow: Int, row: Int) {
+    public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forSubrow subrow: Int, row: Int) {
         
     }
     
-    override final func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         // this function is not implemented... yet
         
@@ -381,27 +381,27 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     }
     
     // ****************
-    func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView) {
+    public func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView) {
         
     }
     
-    override final func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+    override public final func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         
         self.tableView(tableView, didEndDisplayingHeaderView: view)
     }
     
     // ****************
-    func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView) {
+    public func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView) {
         
     }
     
-    override final func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+    override public final func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         
         self.tableView(tableView, didEndDisplayingFooterView: view)
     }
     
     // ****************
-    func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat {
+    public func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat {
         
         if row < self.subrows.first {
             
@@ -413,12 +413,12 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
     }
     
     // ****************
-    func tableView(tableView: UITableView, heightForSubrow subrow: Int, row: Int) -> CGFloat {
+    public func tableView(tableView: UITableView, heightForSubrow subrow: Int, row: Int) -> CGFloat {
         
         return super.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forRow: row + subrow + 1, inSection: 0))
     }
     
-    override final func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override public final func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         let row = indexPath.row
         
@@ -438,37 +438,37 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    func heightForHeaderInTableView(tableView: UITableView) -> CGFloat {
+    public func heightForHeaderInTableView(tableView: UITableView) -> CGFloat {
         
         return super.tableView(tableView, heightForHeaderInSection: 0)
     }
     
-    override final func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override public final func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return self.heightForHeaderInTableView(tableView)
     }
     
-    func heightForFooterInTableView(tableView: UITableView) -> CGFloat {
+    public func heightForFooterInTableView(tableView: UITableView) -> CGFloat {
         
         return super.tableView(tableView, heightForFooterInSection: 0)
     }
     
-    override final func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override public final func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
         return self.heightForFooterInTableView(tableView)
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRow row: Int) -> CGFloat {
+    public func tableView(tableView: UITableView, estimatedHeightForRow row: Int) -> CGFloat {
         
         return tableView.rowHeight //tableView.estimatedRowHeight
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForSubrow subrow: Int, row: Int) -> CGFloat {
+    public func tableView(tableView: UITableView, estimatedHeightForSubrow subrow: Int, row: Int) -> CGFloat {
         
         return tableView.rowHeight //tableView.estimatedRowHeight
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override public func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         let row = indexPath.row
         
@@ -489,47 +489,47 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    func estimatedHeightForHeaderInTableView(tableView: UITableView) -> CGFloat {
+    public func estimatedHeightForHeaderInTableView(tableView: UITableView) -> CGFloat {
         
         return tableView.estimatedSectionHeaderHeight
     }
     
-    override final func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    override public final func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         
         return self.estimatedHeightForHeaderInTableView(tableView)
     }
     
-    func estimatedHeightForFooterInTableView(tableView: UITableView) -> CGFloat {
+    public func estimatedHeightForFooterInTableView(tableView: UITableView) -> CGFloat {
         
         return tableView.estimatedSectionFooterHeight
     }
     
-    override final func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+    override public final func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
         
         return self.estimatedHeightForFooterInTableView(tableView)
     }
     
-    func viewForHeaderInTableView(tableView: UITableView) -> UIView? {
+    public func viewForHeaderInTableView(tableView: UITableView) -> UIView? {
         
         return super.tableView(tableView, viewForHeaderInSection: 0)
     }
     
-    override final func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override public final func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         return self.viewForHeaderInTableView(tableView)
     }
     
-    func viewForFooterInTableView(tableView: UITableView) -> UIView? {
+    public func viewForFooterInTableView(tableView: UITableView) -> UIView? {
         
         return super.tableView(tableView, viewForFooterInSection: 0)
     }
     
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    override public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
         return self.viewForFooterInTableView(tableView)
     }
     
-    func tableView(tableView: UITableView, accessoryButtonTappedForRow row: Int) {
+    public func tableView(tableView: UITableView, accessoryButtonTappedForRow row: Int) {
         
         if row < self.subrows.first {
             
@@ -540,12 +540,12 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    func tableView(tableView: UITableView, accessoryButtonTappedForSubrow subrow: Int, row: Int) {
+    public func tableView(tableView: UITableView, accessoryButtonTappedForSubrow subrow: Int, row: Int) {
         
         super.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: NSIndexPath(forRow: row + subrow + 1, inSection: 0))
     }
     
-    override final func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         
         let row = indexPath.row
         
@@ -566,22 +566,22 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    override final func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override public final func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         return !self.subrows.contains(indexPath.row)
     }
     
-    func tableView(tableView: UITableView, didHighlightRow row: Int) {
+    public func tableView(tableView: UITableView, didHighlightRow row: Int) {
         
         
     }
     
-    func tableView(tableView: UITableView, didHighlightSubrow subrow: Int, row: Int) {
+    public func tableView(tableView: UITableView, didHighlightSubrow subrow: Int, row: Int) {
         
         
     }
     
-    override final func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
         
         let row = indexPath.row
         
@@ -602,17 +602,17 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    func tableView(tableView: UITableView, didUnhighlightRow row: Int) {
+    public func tableView(tableView: UITableView, didUnhighlightRow row: Int) {
         
         
     }
     
-    func tableView(tableView: UITableView, didUnhighlightSubrow subrow: Int, row: Int) {
+    public func tableView(tableView: UITableView, didUnhighlightSubrow subrow: Int, row: Int) {
         
         
     }
     
-    override final func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
         
         let row = indexPath.row
         
@@ -633,22 +633,22 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    override final func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override public final func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
         return indexPath
     }
     
-    override final func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override public final func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
         return indexPath
     }
     
-    func tableView(tableView: UITableView, didSelectRow row: Int) {
+    public func tableView(tableView: UITableView, didSelectRow row: Int) {
         
         
     }
     
-    override final func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var row = indexPath.row
         
@@ -733,70 +733,70 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    func tableView(tableView: UITableView, didDeselectRow row: Int) {
+    public func tableView(tableView: UITableView, didDeselectRow row: Int) {
         
         
     }
     
-    override final func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
         let row = indexPath.row
         
         var index = row
-            
+        
         if index > self.subrows.last {
-                
+            
             index -= self.subrows.count
         }
         self.tableView(tableView, didDeselectRow: index)
     }
     
-    override final func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    override public final func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
         // may be, it will be reimplemented in future
         
         return .None
     }
     
-    override final func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+    override public final func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         
         // may be, it will be reimplemented in future
         
         return nil
     }
     
-    override final func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override public final func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         // may be, it will be reimplemented in future
         
         return nil
     }
     
-    override final func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override public final func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         // may be, it will be reimplemented in future
         
         return false
     }
     
-    override final func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
         
         // may be, it will be reimplemented in future
     }
     
-    override final func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+    override public final func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
         
         // may be, it will be reimplemented in future
     }
     
-    override final func tableView(tableView: UITableView, targetIndexPathForMoveFromRowAtIndexPath sourceIndexPath: NSIndexPath, toProposedIndexPath proposedDestinationIndexPath: NSIndexPath) -> NSIndexPath {
+    override public final func tableView(tableView: UITableView, targetIndexPathForMoveFromRowAtIndexPath sourceIndexPath: NSIndexPath, toProposedIndexPath proposedDestinationIndexPath: NSIndexPath) -> NSIndexPath {
         
         // may be, it will be reimplemented in future
         
         return sourceIndexPath
     }
     
-    func tableView(tableView: UITableView, indentationLevelForRow row: Int) -> Int {
+    public func tableView(tableView: UITableView, indentationLevelForRow row: Int) -> Int {
         
         if row < self.subrows.first {
             
@@ -807,12 +807,12 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    func tableView(tableView: UITableView, indentationLevelForSubrow subrow: Int, row: Int) -> Int {
+    public func tableView(tableView: UITableView, indentationLevelForSubrow subrow: Int, row: Int) -> Int {
         
         return super.tableView(tableView, indentationLevelForRowAtIndexPath: NSIndexPath(forRow: row + subrow + 1, inSection: 0))
     }
     
-    override final func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+    override public final func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
         
         let row = indexPath.row
         
@@ -832,49 +832,45 @@ class DropDownTableViewController: UITableViewController, DropDownTableViewDataS
         }
     }
     
-    override final func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override public final func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         // may be, it will be reimplemented in future
         
         return false
     }
     
-    override final func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+    override public final func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
         
         // may be, it will be reimplemented in future
         
         return false
     }
     
-    override final func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+    override public final func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
         
         // may be, it will be reimplemented in future
     }
     
-    @available(iOS 9.0, *)
-    override final func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    
-        // may be, it will be reimplemented in future
-    
-        return true
-    }
-    
-    @available(iOS 9.0, *)
-    override final func tableView(tableView: UITableView, shouldUpdateFocusInContext context: UITableViewFocusUpdateContext) -> Bool {
+    override public final func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         // may be, it will be reimplemented in future
         
         return true
     }
     
-    @available(iOS 9.0, *)
-    override final func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override public final func tableView(tableView: UITableView, shouldUpdateFocusInContext context: UITableViewFocusUpdateContext) -> Bool {
+        
+        // may be, it will be reimplemented in future
+        
+        return true
+    }
+    
+    override public final func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
         
         // may be, it will be reimplemented in future
     }
     
-    @available(iOS 9.0, *)
-    override final func indexPathForPreferredFocusedViewInTableView(tableView: UITableView) -> NSIndexPath? {
+    override public final func indexPathForPreferredFocusedViewInTableView(tableView: UITableView) -> NSIndexPath? {
         
         // may be, it will be reimplemented in future
         
