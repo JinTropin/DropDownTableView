@@ -79,7 +79,7 @@ class TestViewController: DropDownTableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, cellForSubrow subrow: Int, row: Int, indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForSubrow subrow: Int, inRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {
         
         if row == 0 {
             
@@ -117,7 +117,7 @@ class TestViewController: DropDownTableViewController {
     
     //func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat
     
-    override func tableView(tableView: UITableView, heightForSubrow subrow: Int, row: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForSubrow subrow: Int, inRow row: Int) -> CGFloat {
         
         return 216
     }
