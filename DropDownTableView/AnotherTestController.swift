@@ -46,6 +46,7 @@ class AnotherTestController: DropDownTableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Subrow " + String(row)
         cell.detailTextLabel?.text = String(subrow)
+        cell.accessoryView = nil
         
         return cell
     }

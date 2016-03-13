@@ -3,18 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B51BA0F01C8C158F004B821F /* Changelog.md in Sources */ = {isa = PBXBuildFile; fileRef = B51BA0EF1C8C158F004B821F /* Changelog.md */; };
 		B51BA0F21C8C188A004B821F /* UIAlertController+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51BA0F11C8C188A004B821F /* UIAlertController+TextField.swift */; };
-		B5295F841BF8AEA100305D4F /* DropDownTable.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5295F831BF8AEA100305D4F /* DropDownTable.gif */; };
 		B53586B71C2ECBFB005D58EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53586B61C2ECBFB005D58EE /* TestViewController.swift */; };
-		B53586DF1C2EF661005D58EE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B53586DE1C2EF661005D58EE /* README.md */; };
-		B53FB46A1C2FA7060019DDC9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B53FB4691C2FA7060019DDC9 /* LICENSE */; };
 		B53FB46E1C2FAB250019DDC9 /* DropDownTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53FB46D1C2FAB250019DDC9 /* DropDownTableViewController.swift */; };
-		B5ACA02F1C81AAC000350464 /* DropDownTableView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B5ACA02E1C81AAC000350464 /* DropDownTableView.podspec */; };
 		B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF72271AC30842004A1113 /* AppDelegate.swift */; };
 		B5BF722D1AC30842004A1113 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722B1AC30842004A1113 /* Main.storyboard */; };
 		B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722E1AC30842004A1113 /* Images.xcassets */; };
@@ -144,7 +139,7 @@
 				};
 			};
 			buildConfigurationList = B5BF721D1AC30841004A1113 /* Build configuration list for PBXProject "DropDownTableView" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -167,11 +162,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5BF722D1AC30842004A1113 /* Main.storyboard in Resources */,
-				B5ACA02F1C81AAC000350464 /* DropDownTableView.podspec in Resources */,
 				B5BF72321AC30842004A1113 /* LaunchScreen.xib in Resources */,
-				B5295F841BF8AEA100305D4F /* DropDownTable.gif in Resources */,
 				B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */,
-				B53FB46A1C2FA7060019DDC9 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,9 +176,7 @@
 			files = (
 				B53FB46E1C2FAB250019DDC9 /* DropDownTableViewController.swift in Sources */,
 				B5DF89621BEA558A006C1407 /* TableViewController.swift in Sources */,
-				B53586DF1C2EF661005D58EE /* README.md in Sources */,
 				B5CA8DDF1C887F0F002027B1 /* AnotherTestController.swift in Sources */,
-				B51BA0F01C8C158F004B821F /* Changelog.md in Sources */,
 				B53586B71C2ECBFB005D58EE /* TestViewController.swift in Sources */,
 				B51BA0F21C8C188A004B821F /* UIAlertController+TextField.swift in Sources */,
 				B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */,

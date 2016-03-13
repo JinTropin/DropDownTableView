@@ -178,4 +178,35 @@ class TableViewController: DropDownTableViewController {
         
         print(cell.detailTextLabel?.text, row, subrow)
     }
+    
+    override func tableView(tableView: UITableView, canMoveRow row: Int) -> Bool {
+        
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, canMoveSubrow subrow: Int, inRow row: Int) -> Bool {
+        
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, targetRowForMoveFromRow sourceRow: Int, toProposedRow proposedDestinationRow: Int) -> Int {
+        
+        return proposedDestinationRow
+    }
+    
+    override func tableView(tableView: UITableView, targetSubrowForMoveFromSubrow sourceSubrow: Int, toProposedSubrow proposedDestinationSubrow: Int, inRow row: Int) -> Int {
+        
+        return proposedDestinationSubrow
+    }
+    
+    override func tableView(tableView: UITableView, moveRow sourceRow: Int, toRow destinationRow: Int) {
+        
+        swap(&self.data[sourceRow], &self.data[destinationRow])
+    }
+    
+    override func tableView(tableView: UITableView, moveSubrow sourceSubrow: Int, toSubrow destinationSubrow: Int, inRow row: Int) {
+        
+        let state = self.data[row]
+        state.parameters.exchangeObjectAtIndex(sourceSubrow, withObjectAtIndex: destinationSubrow)
+    }
 }

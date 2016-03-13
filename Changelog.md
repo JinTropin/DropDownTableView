@@ -1,3 +1,7 @@
+## 0.4 (2016-03-13)
+
+- added cell moving
+
 ## 0.3 (2016-03-06)
 
 - set deployment target to 8.0
