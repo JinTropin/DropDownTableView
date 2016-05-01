@@ -126,7 +126,7 @@ class TestViewController: DropDownTableViewController {
         
         self.date = sender.date
         
-        if let cell = self.cellForRow(1) {
+        if let cell = self.tableView.cellForRowAtRow(1) {
             
             cell.detailTextLabel?.text = self.date.customDateFormat
         }
@@ -157,7 +157,7 @@ extension TestViewController: UIPickerViewDelegate {
         
         self.value = row
         
-        if let cell = self.cellForRow(0) {
+        if let cell = self.tableView.cellForRowAtRow(0) {
             
             cell.detailTextLabel?.text = String(self.value)
         }

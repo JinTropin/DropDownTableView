@@ -127,7 +127,7 @@ class TableViewController: DropDownTableViewController {
             
             self.data.removeAtIndex(row)
             
-            self.deleteRowAtRow(row, withRowAnimation: .Automatic)
+            tableView.deleteRowsAtRows([row], withRowAnimation: .Automatic)
             
         } else if editingStyle == .Insert {
             
@@ -141,7 +141,7 @@ class TableViewController: DropDownTableViewController {
             
             self.data[row].parameters.removeObjectAtIndex(subrow)
             
-            self.deleteSubrowAtSubrow(subrow, inRow: row, withRowAnimation: .Automatic)
+            tableView.deleteSubrows([subrow], inRow: row, withRowAnimation: .Automatic)
             
         } else if editingStyle == .Insert {
             
@@ -152,7 +152,7 @@ class TableViewController: DropDownTableViewController {
                 
                 self.data[row].parameters.insertObject(Pair(key: key, value: value), atIndex: 0)
                 
-                self.insertSubrowAtSubrow(0, inRow: row, withRowAnimation: .Automatic)
+                tableView.insertSubrows([0], inRow: row, withRowAnimation: .Automatic)
             })
             
             self.presentViewController(alertController, animated: true, completion: nil)

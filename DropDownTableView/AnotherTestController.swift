@@ -10,11 +10,20 @@ import UIKit
 
 class AnotherTestController: DropDownTableViewController {
     
+    private var numberOfSubrows = 5
+    private var numberOfRows = 50
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.title = "Another test"
+        
+        self.navigationItem.rightBarButtonItem =
+        
+        UIBarButtonItem(barButtonSystemItem: .Done,
+                        target: self,
+                        action: #selector(self.deleteRow(_:)))
     }
     
     override func didReceiveMemoryWarning() {
@@ -22,14 +31,21 @@ class AnotherTestController: DropDownTableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func deleteRow(sender: UIBarButtonItem) {
+        
+        self.numberOfRows += 2
+        
+        self.tableView.insertRowsAtRows([0, 1], withRowAnimation: .Automatic)
+    }
+    
     override func numberOfRowsInTableView(tableView: UITableView) -> Int {
         
-        return 50
+        return self.numberOfRows
     }
     
     override func tableView(tableView: UITableView, numberOfSubrowsInRow row: Int) -> Int {
         
-        return 5
+        return self.numberOfSubrows
     }
     
     override func tableView(tableView: UITableView, cellForRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {

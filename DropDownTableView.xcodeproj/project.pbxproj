@@ -15,6 +15,8 @@
 		B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722E1AC30842004A1113 /* Images.xcassets */; };
 		B5BF72321AC30842004A1113 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5BF72301AC30842004A1113 /* LaunchScreen.xib */; };
 		B5CA8DDF1C887F0F002027B1 /* AnotherTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CA8DDE1C887F0F002027B1 /* AnotherTestController.swift */; };
+		B5CBAFD91CB183BC003D5497 /* UITableView+DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBAFD81CB183BC003D5497 /* UITableView+DropDown.swift */; };
+		B5D3529B1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D3529A1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift */; };
 		B5DF89621BEA558A006C1407 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF89611BEA558A006C1407 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		B5BF722E1AC30842004A1113 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B5BF72311AC30842004A1113 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B5CA8DDE1C887F0F002027B1 /* AnotherTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnotherTestController.swift; sourceTree = "<group>"; };
+		B5CBAFD81CB183BC003D5497 /* UITableView+DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+DropDown.swift"; sourceTree = "<group>"; };
+		B5D3529A1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSIndexPath+DropDown.swift"; sourceTree = "<group>"; };
 		B5DF89611BEA558A006C1407 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +56,8 @@
 			isa = PBXGroup;
 			children = (
 				B53FB46D1C2FAB250019DDC9 /* DropDownTableViewController.swift */,
+				B5CBAFD81CB183BC003D5497 /* UITableView+DropDown.swift */,
+				B5D3529A1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -177,6 +183,8 @@
 				B53FB46E1C2FAB250019DDC9 /* DropDownTableViewController.swift in Sources */,
 				B5DF89621BEA558A006C1407 /* TableViewController.swift in Sources */,
 				B5CA8DDF1C887F0F002027B1 /* AnotherTestController.swift in Sources */,
+				B5D3529B1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift in Sources */,
+				B5CBAFD91CB183BC003D5497 /* UITableView+DropDown.swift in Sources */,
 				B53586B71C2ECBFB005D58EE /* TestViewController.swift in Sources */,
 				B51BA0F21C8C188A004B821F /* UIAlertController+TextField.swift in Sources */,
 				B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */,

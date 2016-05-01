@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "DropDownTableView"
-    s.version      = "0.4"
+    s.version      = "0.5"
     s.summary      = "This is a simple drop down table view."
     s.description  = "DropDownTableViewController is a simple UITableViewController. Inherit from DropDownTableViewController and override methods from DropDownTableViewDataSource and DropDownTableViewDelegate."
     s.homepage     = "https://github.com/NSSimpleApps/DropDownTableView"
@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
     s.requires_arc = true
     s.platform                  = :ios, '8.0'
     s.ios.deployment_target     = '8.0'
-    s.source_files = "Source/DropDownTableViewController.swift"
+    s.source_files = "Source/*.swift"
 end

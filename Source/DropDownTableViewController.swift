@@ -28,220 +28,149 @@ import UIKit
 ////////////////////////////////////////////////
 
 @available(iOS 8.0, *)
-@objc public protocol DropDownTableViewDataSource : NSObjectProtocol {
+/*@objc */public protocol DropDownTableViewDataSource : NSObjectProtocol {
+    
+    func tableView(tableView: UITableView, indexPathsForRows rows: [Int]) -> [NSIndexPath] // [NSIndexPath(forRow:inSection)]
+    
+    func tableView(tableView: UITableView, indexPathsForSubrows subrows: [Int], inRow row: Int) -> [NSIndexPath] // [NSIndexPath(forRow:inSection)]
+    
+    func functionForIndexPath<T>(indexPath: NSIndexPath, functionForRow: (row: Int) -> T, functionForSubrow: (subrow: Int, row: Int) -> T) -> T
+    
+    
     
     func numberOfRowsInTableView(tableView: UITableView) -> Int // Default is 0
-    
-    optional func tableView(tableView: UITableView, numberOfSubrowsInRow row: Int) -> Int // Default is 0
+    /*optional*/ func tableView(tableView: UITableView, numberOfSubrowsInRow row: Int) -> Int // Default is 0
     
     func tableView(tableView: UITableView, cellForRow row: Int, indexPath: NSIndexPath) -> UITableViewCell // must be overriden in child class
-    
     func tableView(tableView: UITableView, cellForSubrow subrow: Int, inRow row: Int, indexPath: NSIndexPath) -> UITableViewCell // must be overriden in child class
     
-    optional func titleForHeaderInTableView(tableView: UITableView) -> String?  // Default is nil
+    /*optional*/ func titleForHeaderInTableView(tableView: UITableView) -> String?  // Default is nil
+    /*optional*/ func titleForFooterInTableView(tableView: UITableView) -> String?  // Default is nil
     
-    optional func titleForFooterInTableView(tableView: UITableView) -> String?  // Default is nil
+    /*optional*/ func tableView(tableView: UITableView, canEditRow row: Int) -> Bool // default is false
+    /*optional*/ func tableView(tableView: UITableView, canEditSubrow subrow: Int, inRow row: Int) -> Bool // default is false
     
-    optional func tableView(tableView: UITableView, canEditRow row: Int) -> Bool // default is false
+    /*optional*/ func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forSubrow subrow: Int, inRow row: Int)
     
-    optional func tableView(tableView: UITableView, canEditSubrow subrow: Int, inRow row: Int) -> Bool // default is false
+    /*optional*/ func tableView(tableView: UITableView, canMoveRow row: Int) -> Bool // default is false
+    /*optional*/ func tableView(tableView: UITableView, canMoveSubrow subrow: Int, inRow row: Int) -> Bool // default is false
     
-    optional func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, accessoryViewForSelectedRow row: Int) -> UIView?  // Default is nil
+    /*optional*/ func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView?  // Default is nil
     
-    optional func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forSubrow subrow: Int, inRow row: Int)
-    
-    optional func tableView(tableView: UITableView, canMoveRow row: Int) -> Bool // default is false
-    
-    optional func tableView(tableView: UITableView, canMoveSubrow subrow: Int, inRow row: Int) -> Bool // default is false
-    
-    
-    optional func tableView(tableView: UITableView, accessoryViewForSelectedRow row: Int) -> UIView?  // Default is nil
-    
-    optional func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView?  // Default is nil
-    
-    optional func tableView(tableView: UITableView, moveRow sourceRow: Int, toRow destinationRow: Int)
-    
-    optional func tableView(tableView: UITableView, moveSubrow sourceSubrow: Int, toSubrow destinationSubrow: Int, inRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, moveRow sourceRow: Int, toRow destinationRow: Int)
+    /*optional*/ func tableView(tableView: UITableView, moveSubrow sourceSubrow: Int, toSubrow destinationSubrow: Int, inRow row: Int)
 }
 
 @available(iOS 8.0, *)
-@objc public protocol DropDownTableViewDelegate : NSObjectProtocol {
+/*@objc */public protocol DropDownTableViewDelegate : NSObjectProtocol {
     
-    optional func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forSubrow subrow: Int, inRow row: Int)
     
-    optional func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forSubrow subrow: Int, inRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, willDisplayHeaderView view: UIView)
+    /*optional*/ func tableView(tableView: UITableView, willDisplayFooterView view: UIView)
     
-    optional func tableView(tableView: UITableView, willDisplayHeaderView view: UIView)
+    /*optional*/ func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forSubrow subrow: Int, inRow row: Int)
     
-    optional func tableView(tableView: UITableView, willDisplayFooterView view: UIView)
+    /*optional*/ func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView)
+    /*optional*/ func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView)
     
-    optional func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, heightForSubrow subrow: Int, inRow row: Int) -> CGFloat
     
-    optional func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forSubrow subrow: Int, inRow row: Int)
+    /*optional*/ func heightForHeaderInTableView(tableView: UITableView) -> CGFloat
+    /*optional*/ func heightForFooterInTableView(tableView: UITableView) -> CGFloat
     
-    optional func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView)
+    /*optional*/ func tableView(tableView: UITableView, estimatedHeightForRow row: Int) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, estimatedHeightForSubrow subrow: Int, inRow row: Int) -> CGFloat
     
-    optional func tableView(tableView: UITableView, didEndDisplayingFooterView view: UIView)
+    /*optional*/ func estimatedHeightForHeaderInTableView(tableView: UITableView) -> CGFloat
+    /*optional*/ func estimatedHeightForFooterInTableView(tableView: UITableView) -> CGFloat
     
-    optional func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat
+    /*optional*/ func viewForHeaderInTableView(tableView: UITableView) -> UIView?
+    /*optional*/ func viewForFooterInTableView(tableView: UITableView) -> UIView?
     
-    optional func tableView(tableView: UITableView, heightForSubrow subrow: Int, inRow row: Int) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, accessoryButtonTappedForRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, accessoryButtonTappedForSubrow subrow: Int, inRow row: Int)
     
-    optional func heightForHeaderInTableView(tableView: UITableView) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, shouldHighlightRow row: Int) -> Bool
+    /*optional*/ func tableView(tableView: UITableView, shouldHighlightSubrow subrow: Int, inRow row: Int) -> Bool
     
-    optional func heightForFooterInTableView(tableView: UITableView) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, didHighlightRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, didHighlightSubrow subrow: Int, inRow row: Int)
     
-    optional func tableView(tableView: UITableView, estimatedHeightForRow row: Int) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, didUnhighlightRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, didUnhighlightSubrow subrow: Int, inRow row: Int)
     
-    optional func tableView(tableView: UITableView, estimatedHeightForSubrow subrow: Int, inRow row: Int) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, didSelectRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, didDeselectRow row: Int)
     
-    optional func estimatedHeightForHeaderInTableView(tableView: UITableView) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, editingStyleForRow row: Int) -> UITableViewCellEditingStyle // default is .None
+    /*optional*/ func tableView(tableView: UITableView, editingStyleForSubrow subrow: Int, inRow row: Int) -> UITableViewCellEditingStyle // default is .None
     
-    optional func estimatedHeightForFooterInTableView(tableView: UITableView) -> CGFloat
+    /*optional*/ func tableView(tableView: UITableView, editActionsForRow row: Int) -> [UITableViewRowAction]?
+    /*optional*/ func tableView(tableView: UITableView, editActionsForSubrow subrow: Int, inRow row: Int) -> [UITableViewRowAction]?
     
-    optional func viewForHeaderInTableView(tableView: UITableView) -> UIView?
+    /*optional*/ func tableView(tableView: UITableView, indentationLevelForRow row: Int) -> Int
+    /*optional*/ func tableView(tableView: UITableView, indentationLevelForSubrow subrow: Int, inRow row: Int) -> Int
     
-    optional func viewForFooterInTableView(tableView: UITableView) -> UIView?
+    /*optional*/ func tableView(tableView: UITableView, shouldShowMenuForRow row: Int) -> Bool
+    /*optional*/ func tableView(tableView: UITableView, shouldShowMenuForSubrow subrow: Int, inRow row: Int) -> Bool
     
-    optional func tableView(tableView: UITableView, accessoryButtonTappedForRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtRow row: Int, withSender sender: AnyObject?) -> Bool
+    /*optional*/ func tableView(tableView: UITableView, canPerformAction action: Selector, forSubrow subrow: Int, inRow row: Int, withSender sender: AnyObject?) -> Bool
     
-    optional func tableView(tableView: UITableView, accessoryButtonTappedForSubrow subrow: Int, inRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, performAction action: Selector, forRowAtRow row: Int, withSender sender: AnyObject?)
+    /*optional*/ func tableView(tableView: UITableView, performAction action: Selector, forSubrow subrow: Int, inRow row: Int, withSender sender: AnyObject?)
     
-    optional func tableView(tableView: UITableView, shouldHighlightRow row: Int) -> Bool
+    /*optional*/ func tableView(tableView: UITableView, shouldIndentWhileEditingRow row: Int) -> Bool // default is false
+    /*optional*/ func tableView(tableView: UITableView, shouldIndentWhileEditingSubrow subrow: Int, inRow row: Int) -> Bool // default is false
     
-    optional func tableView(tableView: UITableView, shouldHighlightSubrow subrow: Int, inRow row: Int) -> Bool
+    /*optional*/ func tableView(tableView: UITableView, willBeginEditingRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, willBeginEditingSubrow subrow: Int, inRow row: Int)
     
-    optional func tableView(tableView: UITableView, didHighlightRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, didEndEditingRow row: Int)
+    /*optional*/ func tableView(tableView: UITableView, didEndEditingSubrow subrow: Int, inRow row: Int)
     
-    optional func tableView(tableView: UITableView, didHighlightSubrow subrow: Int, inRow row: Int)
-    
-    optional func tableView(tableView: UITableView, didUnhighlightRow row: Int)
-    
-    optional func tableView(tableView: UITableView, didUnhighlightSubrow subrow: Int, inRow row: Int)
-    
-    optional func tableView(tableView: UITableView, didSelectRow row: Int)
-    
-    optional func tableView(tableView: UITableView, didDeselectRow row: Int)
-    
-    optional func tableView(tableView: UITableView, editingStyleForRow row: Int) -> UITableViewCellEditingStyle // default is .None
-    
-    optional func tableView(tableView: UITableView, editingStyleForSubrow subrow: Int, inRow row: Int) -> UITableViewCellEditingStyle // default is .None
-    
-    optional func tableView(tableView: UITableView, indentationLevelForRow row: Int) -> Int
-    
-    optional func tableView(tableView: UITableView, indentationLevelForSubrow subrow: Int, inRow row: Int) -> Int
-    
-    optional func tableView(tableView: UITableView, shouldIndentWhileEditingRow row: Int) -> Bool // default is false
-    
-    optional func tableView(tableView: UITableView, shouldIndentWhileEditingSubrow subrow: Int, inRow row: Int) -> Bool // default is false
-    
-    optional func tableView(tableView: UITableView, willBeginEditingRow row: Int)
-    
-    optional func tableView(tableView: UITableView, willBeginEditingSubrow subrow: Int, inRow row: Int)
-    
-    optional func tableView(tableView: UITableView, didEndEditingRow row: Int)
-    
-    optional func tableView(tableView: UITableView, didEndEditingSubrow subrow: Int, inRow row: Int)
-    
-    
-    optional func tableView(tableView: UITableView, targetRowForMoveFromRow sourceRow: Int, toProposedRow proposedDestinationRow: Int) -> Int // default is sourceRow
-    
-    optional func tableView(tableView: UITableView, targetSubrowForMoveFromSubrow sourceSubrow: Int, toProposedSubrow proposedDestinationSubrow: Int, inRow row: Int) -> Int // default is sourceSubrow
+    /*optional*/ func tableView(tableView: UITableView, targetRowForMoveFromRow sourceRow: Int, toProposedRow proposedDestinationRow: Int) -> Int // default is sourceRow
+    /*optional*/ func tableView(tableView: UITableView, targetSubrowForMoveFromSubrow sourceSubrow: Int, toProposedSubrow proposedDestinationSubrow: Int, inRow row: Int) -> Int // default is sourceSubrow
 }
 
 @available(iOS 8.0, *)
 public class DropDownTableViewController: UITableViewController, DropDownTableViewDataSource, DropDownTableViewDelegate {
     
-    private var subrows: [Int] = []
+    private var selectedRow: Int?
+    private var numberOfSubrows = 0
+    
+    public override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self,
+                       selector: #selector(self.dropDownDeleteRows(_:)),
+                       name: DropDownDeleteRowsNotification,
+                       object: self.tableView)
+        nc.addObserver(self,
+                       selector: #selector(self.dropDownInsertRows(_:)),
+                       name: DropDownInsertRowsNotification,
+                       object: self.tableView)
+    }
+    
+    deinit {
+        
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(self, name: DropDownDeleteRowsNotification, object: self.tableView)
+        nc.removeObserver(self, name: DropDownInsertRowsNotification, object: self.tableView)
+    }
     
     override public final func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return 1
     }
-    
-    // please use this method instead of -[UITableView cellForRowAtIndexPath:]
-    public func cellForRow(row: Int) -> UITableViewCell? {
-        
-        if row < self.subrows.first {
-            
-            return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0))
-            
-        } else {
-            
-            return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row + self.subrows.count, inSection: 0))
-        }
-    }
-    
-    // please use this method instead of -[UITableView cellForRowAtIndexPath:]
-    public func cellForSubrow(subrow: Int, inRow row: Int) -> UITableViewCell? {
-        
-        guard subrow >= 0 && subrow <= (self.subrows.count - 1) else {
-            
-            return nil
-        }
-        
-        if row + 1 == self.subrows.first {
-            
-            return self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row + subrow + 1, inSection: 0))
-        }
-        return nil
-    }
-    
-    // please use this method instead of -[UITableView deleteRowsAtIndexPaths:withRowAnimation:]
-    public func deleteRowAtRow(row: Int, withRowAnimation animation: UITableViewRowAnimation) {
-        
-        var rowToDelete = 0
-        
-        if row < self.subrows.first {
-            
-            rowToDelete = row
-            
-        } else {
-            
-            rowToDelete = row + self.subrows.count
-        }
-        
-        self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: rowToDelete, inSection: 0)], withRowAnimation: animation)
-    }
-    
-    // please use this method instead of -[UITableView deleteRowsAtIndexPaths:withRowAnimation:]
-    public func deleteSubrowAtSubrow(subrow: Int, inRow row: Int, withRowAnimation animation: UITableViewRowAnimation) {
-        
-        guard subrow >= 0 && subrow <= (self.subrows.count - 1) else {
-            
-            return
-        }
-        self.subrows.removeLast()
-        
-        self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: row + subrow + 1, inSection: 0)], withRowAnimation: animation)
-    }
-    
-    // please use this method instead of -[UITableView insertRowsAtIndexPaths:withRowAnimation:]
-    public func insertRowAtRow(row: Int, withRowAnimation animation: UITableViewRowAnimation) {
-        
-        if row < self.subrows.first {
-            
-            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: row, inSection: 0)], withRowAnimation: animation)
-            
-        } else {
-            
-            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: row + self.subrows.count, inSection: 0)], withRowAnimation: animation)
-        }
-    }
-    
-    // please use this method instead of -[UITableView insertRowsAtIndexPaths:withRowAnimation:]
-    public func insertSubrowAtSubrow(subrow: Int, inRow row: Int, withRowAnimation animation: UITableViewRowAnimation) {
-        
-        guard subrow >= 0 && subrow <= self.subrows.count else {
-            
-            return
-        }
-            
-        self.subrows.extend(row + subrow + 1)
-        
-        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: row + subrow + 1, inSection: 0)], withRowAnimation: animation)
-    }
-    
     // DropDownTableViewDataSource implementation
     
     // ****************
@@ -252,7 +181,17 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     
     override public final func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.numberOfRowsInTableView(tableView) + self.subrows.count
+        let numberOfRowsInTableView = self.numberOfRowsInTableView(tableView)
+        
+        if let selectedRow = self.selectedRow {
+            
+            self.numberOfSubrows = self.tableView(tableView, numberOfSubrowsInRow: selectedRow)
+        } else {
+            
+            self.numberOfSubrows = 0
+        }
+        
+        return numberOfRowsInTableView + self.numberOfSubrows
     }
     
     // ****************
@@ -264,12 +203,12 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     // ****************
     public func tableView(tableView: UITableView, cellForRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {
         
-        fatalError(__FUNCTION__ + " has not been implemented")
+        fatalError("-[DropDownTableViewController tableView:cellForRow:indexPath] has not been implemented")
     }
     
     public func tableView(tableView: UITableView, cellForSubrow subrow: Int, inRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {
         
-        fatalError(__FUNCTION__ + " has not been implemented")
+        fatalError("-[DropDownTableViewController tableView:cellForRow:indexPath] has not been implemented")
     }
     
     public func tableView(tableView: UITableView, accessoryViewForSelectedRow row: Int) -> UIView? {
@@ -293,7 +232,7 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
                 
                 let accessoryViewForDeselectedRow = self.tableView(tableView, accessoryViewForDeselectedRow: row)
                 
-                if row + 1 == self.subrows.first {
+                if row + 1 == self.selectedRow {
                     
                     if accessoryViewForSelectedRow != nil {
                         
@@ -354,7 +293,7 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
         return self.functionForIndexPath(indexPath,
             functionForRow: { (row) -> Bool in
                 
-                return self.subrows.isEmpty && self.tableView(tableView, canEditRow: row)
+                return (self.numberOfSubrows == 0) && self.tableView(tableView, canEditRow: row)
             },
             functionForSubrow: { (subrow, row) -> Bool in
                 
@@ -380,7 +319,7 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
         return self.functionForIndexPath(indexPath,
             functionForRow: { (row) -> Bool in
                 
-                return self.subrows.isEmpty && self.tableView(tableView, canMoveRow: row)
+                return (self.numberOfSubrows == 0) && self.tableView(tableView, canMoveRow: row)
             },
             functionForSubrow: { (subrow, row) -> Bool in
                 
@@ -434,7 +373,7 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     
     override public final func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
-        if self.subrows.isEmpty {
+        if self.numberOfSubrows == 0 {
             
             let sourceRow = sourceIndexPath.row
             let destinationRow = destinationIndexPath.row
@@ -443,11 +382,29 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
             
         } else {
             
-            let row = self.subrows.first! - 1
-            let sourceSubrow = sourceIndexPath.row - row - 1
-            let destinationSubrow = destinationIndexPath.row - row - 1
+            let sourceSubrow = self.functionForIndexPath(sourceIndexPath,
+                                                         functionForRow: { (row) -> Int? in
+                                                            
+                                                            return nil
+                },
+                                                         functionForSubrow: { (subrow, row) -> Int in
+                                                            
+                                                            return subrow
+            })
             
-            self.tableView(tableView, moveSubrow: sourceSubrow, toSubrow: destinationSubrow, inRow: row)
+            let destinationSubrow = self.functionForIndexPath(destinationIndexPath,
+                                                         functionForRow: { (row) -> Int? in
+                                                            
+                                                            return nil
+                },
+                                                         functionForSubrow: { (subrow, row) -> Int in
+                                                            
+                                                            return subrow
+            })
+            
+            self.tableView(tableView, moveSubrow: sourceSubrow!,
+                           toSubrow: destinationSubrow!,
+                           inRow: self.selectedRow!)
         }
     }
     
@@ -505,9 +462,18 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
         
     }
     
+    // !!!!! NOTE: this method is not suitable for deletion and insertion any cells
     override public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        
+        self.functionForIndexPath(indexPath,
+                                  functionForRow: { (row) -> Void in
+                                    
+                                    self.tableView(tableView, didEndDisplayingCell: cell, forRow: row)
+                                    
+            }) { (subrow, row) -> Void in
+                
+                self.tableView(tableView, didEndDisplayingCell: cell, forSubrow: subrow, inRow: row)
+        }
     }
     
     // ****************
@@ -533,18 +499,12 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     // ****************
     public func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat {
         
-        if row < self.subrows.first {
-            
-            return super.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forRow: row, inSection: 0))
-        } else {
-            
-            return super.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forRow: row + self.subrows.count, inSection: 0))
-        }
+        return 44//tableView.rowHeight
     }
     
     public func tableView(tableView: UITableView, heightForSubrow subrow: Int, inRow row: Int) -> CGFloat {
         
-        return super.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forRow: row + subrow + 1, inSection: 0))
+        return 44//tableView.rowHeight
     }
     
     override public final func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -586,12 +546,12 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     // ****************
     public func tableView(tableView: UITableView, estimatedHeightForRow row: Int) -> CGFloat {
         
-        return tableView.rowHeight //tableView.estimatedRowHeight
+        return tableView.rowHeight//tableView.estimatedRowHeight
     }
     
     public func tableView(tableView: UITableView, estimatedHeightForSubrow subrow: Int, inRow row: Int) -> CGFloat {
         
-        return tableView.rowHeight //tableView.estimatedRowHeight
+        return tableView.rowHeight//tableView.estimatedRowHeight
     }
     
     override public final func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -603,7 +563,7 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
             },
             functionForSubrow: { (subrow, row) -> CGFloat in
                 
-                return self.tableView(tableView, estimatedHeightForSubrow: row - self.subrows.first!, inRow: self.subrows.first! - 1)
+                return self.tableView(tableView, estimatedHeightForSubrow: subrow, inRow: row)
         })
     }
     
@@ -769,94 +729,85 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     // ****************
     public func tableView(tableView: UITableView, didSelectRow row: Int) {
         
-        
-    }
-    
-    override public final func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        var row = indexPath.row
-        
-        if self.subrows.first == nil { // subrows should be inserted into row
+        if self.selectedRow == nil {
             
+            self.selectedRow = row
             let count = self.tableView(tableView, numberOfSubrowsInRow: row)
             
             tableView.beginUpdates()
-            
-            for subrow in (0..<count) {
-                
-                self.insertSubrowAtSubrow(subrow, inRow: row, withRowAnimation: .Automatic)
-            }
-            
+            tableView.insertSubrows(Array(0..<count),
+                                    inRow: row,
+                                    withRowAnimation: .Automatic)
             tableView.endUpdates()
             
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) {
+            if let cell = tableView.cellForRowAtRow(row) {
                 
                 cell.accessoryView = self.tableView(tableView, accessoryViewForSelectedRow: row)
             }
-            tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.None)
+            tableView.selectRowAtRow(row, animated: true, scrollPosition: .None)
             
-        } else if (self.subrows.first! - 1) == row { // subrows should be deleted from row
+        } else if self.selectedRow! == row { // subrows should be deleted from row
             
+            self.selectedRow = nil
             tableView.beginUpdates()
-            
-            for subrow in (0..<self.subrows.count).reverse() {
-                
-                self.deleteSubrowAtSubrow(subrow, inRow: row, withRowAnimation: .Automatic)
-            }
-            
+            tableView.deleteSubrows(Array(0..<self.numberOfSubrows).reverse(),
+                                    inRow: row,
+                                    withRowAnimation: .Automatic)
             tableView.endUpdates()
             
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) {
+            if let cell = tableView.cellForRowAtRow(row) {
                 
                 cell.accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: row)
             }
-            tableView.deselectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true)
+            tableView.deselectRowAtRow(row, animated: true)
             
         } else { // subrows should be deleted from row and inserted into (row - deletedCount)
             
-            let deletedCount = self.subrows.count
-            
-            let selectedRow = self.subrows.first! - 1
+            let deselectedRow = self.selectedRow!
+            self.selectedRow = nil
             
             tableView.beginUpdates()
-            
-            for subrow in (0..<deletedCount).reverse() {
-                
-                self.deleteSubrowAtSubrow(subrow, inRow: selectedRow, withRowAnimation: .Automatic)
-            }
-            
+            tableView.deleteSubrows(Array(0..<self.numberOfSubrows).reverse(),
+                                    inRow: deselectedRow,
+                                    withRowAnimation: .Automatic)
             tableView.endUpdates()
             
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedRow, inSection: 0)) {
+            if let cell = tableView.cellForRowAtRow(deselectedRow) {
                 
-                if let accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: selectedRow) {
+                if let accessoryView = self.tableView(tableView, accessoryViewForDeselectedRow: deselectedRow) {
                     
                     cell.accessoryView = accessoryView
                 }
             }
-            tableView.deselectRowAtIndexPath(NSIndexPath(forRow: selectedRow, inSection: 0), animated: true)
+            tableView.deselectRowAtRow(deselectedRow, animated: true)
             
-            if row > selectedRow {
-                
-                row -= deletedCount
-            }
-            
+            self.selectedRow = row
             let count = self.tableView(tableView, numberOfSubrowsInRow: row)
             
             tableView.beginUpdates()
-            
-            for subrow in (0..<count) {
-                
-                self.insertSubrowAtSubrow(subrow, inRow: row, withRowAnimation: .Automatic)
-            }
-            
+            tableView.insertSubrows(Array(0..<count),
+                                    inRow: row,
+                                    withRowAnimation: .Automatic)
             tableView.endUpdates()
             
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) {
+            if let cell = tableView.cellForRowAtRow(row) {
                 
                 cell.accessoryView = self.tableView(tableView, accessoryViewForSelectedRow: row)
             }
-            tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.None)
+            tableView.selectRowAtRow(row, animated: true, scrollPosition: .None)
+        }
+    }
+    
+    override public final func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.functionForIndexPath(indexPath,
+                                  functionForRow: { (row) -> Void in
+                                    
+                                    self.tableView(tableView, didSelectRow: row)
+                                    
+            }) { (subrow, row) -> Void in
+                
+                
         }
     }
     
@@ -910,10 +861,29 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
         return super.tableView(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
     }*/
     
-    /*override public final func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    // ****************
+    public func tableView(tableView: UITableView, editActionsForRow row: Int) -> [UITableViewRowAction]? {
         
         return nil
-    }*/
+    }
+    
+    public func tableView(tableView: UITableView, editActionsForSubrow subrow: Int, inRow row: Int) -> [UITableViewRowAction]? {
+        
+        return nil
+    }
+    
+    override public final func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        return self.functionForIndexPath(indexPath,
+                                         functionForRow: { (row) -> [UITableViewRowAction]? in
+                                            
+                                            return self.tableView(tableView, editActionsForRow: row)
+                                            
+            }, functionForSubrow: { (subrow, row) -> [UITableViewRowAction]? in
+                
+                return self.tableView(tableView, editActionsForSubrow: subrow, inRow: row)
+        })
+    }
     
     // ****************
     public func tableView(tableView: UITableView, shouldIndentWhileEditingRow row: Int) -> Bool {
@@ -999,7 +969,7 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     
     override public final func tableView(tableView: UITableView, targetIndexPathForMoveFromRowAtIndexPath sourceIndexPath: NSIndexPath, toProposedIndexPath proposedDestinationIndexPath: NSIndexPath) -> NSIndexPath {
         
-        if self.subrows.isEmpty {
+        if self.numberOfSubrows == 0 {
             
             let targetForRow = self.tableView(tableView, targetRowForMoveFromRow: sourceIndexPath.row,
                 toProposedRow: proposedDestinationIndexPath.row)
@@ -1008,38 +978,44 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
             
         } else {
             
-            if self.subrows.contains(proposedDestinationIndexPath.row) {
-                
-                let row = self.subrows.first! - 1
-                let sourceSubrow = sourceIndexPath.row - row - 1
-                let proposedDestinationSubrow = proposedDestinationIndexPath.row - row - 1
-                
-                let targetSubrow = self.tableView(tableView, targetSubrowForMoveFromSubrow: sourceSubrow, toProposedSubrow: proposedDestinationSubrow, inRow: row)
-                
-                return NSIndexPath(forRow: targetSubrow + row + 1, inSection: 0)
-                
-            } else {
-                
-                return sourceIndexPath
-            }
+            let sourceSubrow = self.functionForIndexPath(sourceIndexPath,
+                                      functionForRow: { (row) -> Int? in
+                                        
+                                        return nil
+                                        
+                }, functionForSubrow: { (subrow, row) -> Int in
+                    
+                    return subrow
+            })
+            
+            let proposedSubrow = self.functionForIndexPath(proposedDestinationIndexPath,
+                                                   functionForRow: { (row) -> Int? in
+                                                    
+                                                    return nil
+                                                    
+                }, functionForSubrow: { (subrow, row) -> Int in
+                    
+                    return subrow
+            })
+            
+            let targetSubrow = self.tableView(tableView,
+                                              targetSubrowForMoveFromSubrow: sourceSubrow!,
+                                              toProposedSubrow: proposedSubrow!,
+                                              inRow: self.selectedRow!)
+            
+            return NSIndexPath(forRow: targetSubrow + self.selectedRow! + 1, inSection: 0)
         }
     }
     
     // ****************
     public func tableView(tableView: UITableView, indentationLevelForRow row: Int) -> Int {
         
-        if row < self.subrows.first {
-            
-            return super.tableView(tableView, indentationLevelForRowAtIndexPath: NSIndexPath(forRow: row, inSection: 0))
-        } else {
-            
-            return super.tableView(tableView, indentationLevelForRowAtIndexPath: NSIndexPath(forRow: row + self.subrows.count, inSection: 0))
-        }
+        return 0
     }
     
     public func tableView(tableView: UITableView, indentationLevelForSubrow subrow: Int, inRow row: Int) -> Int {
         
-        return super.tableView(tableView, indentationLevelForRowAtIndexPath: NSIndexPath(forRow: row + subrow + 1, inSection: 0))
+        return 0
     }
     
     override public final func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
@@ -1054,61 +1030,187 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
                 self.tableView(tableView, indentationLevelForSubrow: subrow, inRow: subrow)
         }
     }
+    // ****************
+    public func tableView(tableView: UITableView, shouldShowMenuForRow row: Int) -> Bool {
+        
+        return false
+    }
+    
+    public func tableView(tableView: UITableView, shouldShowMenuForSubrow subrow: Int, inRow row: Int) -> Bool {
+        
+        return false
+    }
     
     override public final func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-        // may be, it will be reimplemented in future
+        return self.functionForIndexPath(indexPath,
+                                         functionForRow: { (row) -> Bool in
+                                            
+                                            self.tableView(tableView, shouldShowMenuForRow: row)
+                                            
+        }) { (subrow, row) -> Bool in
+            
+            self.tableView(tableView, shouldShowMenuForSubrow: subrow, inRow: row)
+        }
+    }
+    
+    // ****************
+    public func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtRow row: Int, withSender sender: AnyObject?) -> Bool {
         
-        return false
+        return true
+    }
+    
+    public func tableView(tableView: UITableView, canPerformAction action: Selector, forSubrow subrow: Int, inRow row: Int, withSender sender: AnyObject?) -> Bool {
+        
+        return true
     }
     
     override public final func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
         
-        // may be, it will be reimplemented in future
+        return self.functionForIndexPath(indexPath,
+                                         functionForRow: { (row) -> Bool in
+                                            
+                                            self.tableView(tableView, canPerformAction: action, forRowAtRow: row, withSender: sender)
+                                            
+        }) { (subrow, row) -> Bool in
+            
+            self.tableView(tableView, canPerformAction: action, forSubrow: subrow, inRow: row, withSender: sender)
+        }
+    }
+    
+    // ****************
+    public func tableView(tableView: UITableView, performAction action: Selector, forRowAtRow row: Int, withSender sender: AnyObject?) {
         
-        return false
+    }
+    public func tableView(tableView: UITableView, performAction action: Selector, forSubrow subrow: Int, inRow row: Int, withSender sender: AnyObject?) {
+        
     }
     
     override public final func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
         
-        // may be, it will be reimplemented in future
+        return self.functionForIndexPath(indexPath,
+                                         functionForRow: { (row) -> Void in
+                                            
+                                            self.tableView(tableView, performAction: action, forRowAtRow: row, withSender: sender)
+                                            
+        }) { (subrow, row) -> Void in
+            
+            self.tableView(tableView, performAction: action, forSubrow: subrow, inRow: row, withSender: sender)
+        }
     }
 }
 // 977
-private extension DropDownTableViewController {
+public extension DropDownTableViewController {
     
-    private func functionForIndexPath<T>(indexPath: NSIndexPath, functionForRow: (row: Int) -> T, functionForSubrow: (subrow: Int, row: Int) -> T) -> T {
+    public func tableView(tableView: UITableView, indexPathsForRows rows: [Int]) -> [NSIndexPath] {
         
-        let row = indexPath.row
-        
-        if self.subrows.contains(row) {
+        if let selectedRow = self.selectedRow where self.numberOfSubrows > 0 {
             
-            return functionForSubrow(subrow: row - self.subrows.first!, row: self.subrows.first! - 1)
+            return rows.map({ (row: Int) -> NSIndexPath in
+                
+                if row <= selectedRow {
+                    
+                    return NSIndexPath(forRow: row, inSection: 0)
+                    
+                } else {
+                    
+                    return NSIndexPath(forRow: row + self.numberOfSubrows + 1, inSection: 0)
+                }
+            })
             
         } else {
             
-            var index = row
-            
-            if index > self.subrows.last {
+            return rows.map({ (row: Int) -> NSIndexPath in
                 
-                index -= self.subrows.count
+                NSIndexPath(forRow: row, inSection: 0)
+            })
+        }
+    }
+    
+    public func tableView(tableView: UITableView, indexPathsForSubrows subrows: [Int], inRow row: Int) -> [NSIndexPath] {
+        
+        if self.selectedRow == row && self.numberOfSubrows > 0 {
+            
+            return subrows.flatMap({ (subrow: Int) -> NSIndexPath? in
+                
+                if subrow < self.numberOfSubrows {
+                    
+                    return NSIndexPath(forRow: row + subrow + 1, inSection: 0)
+                }
+                return nil
+            })
+        }
+        return []
+    }
+    
+    public func functionForIndexPath<T>(indexPath: NSIndexPath, functionForRow: (row: Int) -> T, functionForSubrow: (subrow: Int, row: Int) -> T) -> T {
+        
+        let row = indexPath.row
+        
+        switch (self.selectedRow, self.numberOfSubrows) {
+        case (let sr?, _) where row <= sr:
+            fallthrough
+            
+        case (_, 0):
+            fallthrough
+            
+        case (nil, _):
+            return functionForRow(row: row)
+            
+        case (let sr?, let n) where row > sr && row <= (sr + n):
+            return functionForSubrow(subrow: row - sr - 1, row: sr)
+            
+        default:
+            return functionForRow(row: row - self.numberOfSubrows)
+        }
+    }
+}
+
+internal extension DropDownTableViewController {
+    
+    func dropDownDeleteRows(notification: NSNotification) {
+        
+        if let selectedRow = self.selectedRow {
+            
+            let rows = notification.userInfo![DropDownRows] as! [Int]
+            
+            if rows.contains(selectedRow) {
+                
+                self.selectedRow = nil
+                
+            } else {
+                
+                let count = rows.countIf({ (elem: Int) -> Bool in
+                    
+                    elem < selectedRow
+                })
+                self.selectedRow! -= count
             }
-            return functionForRow(row: index)
+        }
+    }
+    
+    func dropDownInsertRows(notification: NSNotification) {
+        
+        if let selectedRow = self.selectedRow {
+            
+            let rows = notification.userInfo![DropDownRows] as! [Int]
+                
+            let count = rows.countIf({ (elem: Int) -> Bool in
+                    
+                elem <= selectedRow
+            })
+            self.selectedRow! += count
         }
     }
 }
 
 private extension Array where Element: IntegerType {
     
-    mutating func extend(elem: Element) {
+    func countIf(@noescape predicate: (Array.Generator.Element) throws -> Bool) rethrows -> Int {
         
-        if let last = self.last {
+        return try self.reduce(0) { (index: Int, elem: Array.Generator.Element) -> Int in
             
-            self.append(last + 1)
-            
-        } else {
-            
-            self.append(elem)
+            return index + (try predicate(elem) ? 1 : 0)
         }
     }
 }
