@@ -1,3 +1,10 @@
+## 0.5 (2016-05-01)
+
+- API changes
+- added drop-down category under `UITableView`
+- the methods `-[DropDownTableViewController tableView:didEndDisplayingCell:forRow:]` and `-[DropDownTableViewController tableView:didEndDisplayingCell:forSubrow:inRow]` have been implemented
+- added delegate methods for `UITableViewRowAction`
+
 ## 0.4 (2016-03-13)
 
 - added cell moving
