@@ -1172,7 +1172,7 @@ internal extension DropDownTableViewController {
         
         if let selectedRow = self.selectedRow {
             
-            let rows = notification.userInfo![DropDownRows] as! [Int]
+            let rows = notification.userInfo![DropDownRowsKey] as! [Int]
             
             if rows.contains(selectedRow) {
                 
@@ -1193,7 +1193,7 @@ internal extension DropDownTableViewController {
         
         if let selectedRow = self.selectedRow {
             
-            let rows = notification.userInfo![DropDownRows] as! [Int]
+            let rows = notification.userInfo![DropDownRowsKey] as! [Int]
                 
             let count = rows.countIf({ (elem: Int) -> Bool in
                     
