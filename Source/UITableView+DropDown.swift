@@ -14,7 +14,7 @@ internal let DropDownDeleteRowsNotification = "DropDownDeleteRowsNotification"
 // this string contant is used for notify dataSource about rows insertion
 internal let DropDownInsertRowsNotification = "DropDownInsertRowsNotification"
 
-internal let DropDownRows = "DropDownRows"
+internal let DropDownRowsKey = "DropDownRowsKey"
 
 public extension UITableView {
     
@@ -30,6 +30,7 @@ public extension UITableView {
         return CGRectZero
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public func rectForSubrowAtIndexPath(indexPath: NSIndexPath) -> CGRect {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource {
@@ -59,6 +60,7 @@ public extension UITableView {
         return nil
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public func indexPathForSubrowAtPoint(point: CGPoint) -> NSIndexPath? {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPath = self.indexPathForRowAtPoint(point) {
@@ -94,6 +96,7 @@ public extension UITableView {
         return nil
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public func indexPathForSubrowCell(cell: UITableViewCell) -> NSIndexPath? {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPath = self.indexPathForCell(cell) {
@@ -131,6 +134,7 @@ public extension UITableView {
         return nil
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public func indexPathsForSubrowsInRect(rect: CGRect) -> [NSIndexPath]? {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPaths = self.indexPathsForRowsInRect(rect) {
@@ -163,6 +167,7 @@ public extension UITableView {
         return nil
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public func cellForSubrowAtIndexPath(indexPath: NSIndexPath) -> UITableViewCell? {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource {
@@ -197,6 +202,7 @@ public extension UITableView {
         return nil
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public var indexPathsForVisibleSubrows: [NSIndexPath]? {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource,
@@ -230,6 +236,7 @@ public extension UITableView {
         }
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public func scrollToSubrowAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UITableViewScrollPosition, animated: Bool) {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource {
@@ -251,7 +258,7 @@ public extension UITableView {
             let nc = NSNotificationCenter.defaultCenter()
             nc.postNotificationName(DropDownInsertRowsNotification,
                                     object: self,
-                                    userInfo: [DropDownRows: rows])
+                                    userInfo: [DropDownRowsKey: rows])
             
             self.insertRowsAtIndexPaths(indexPathsForRows, withRowAnimation: animation)
         }
@@ -277,7 +284,7 @@ public extension UITableView {
             let nc = NSNotificationCenter.defaultCenter()
             nc.postNotificationName(DropDownDeleteRowsNotification,
                                     object: self,
-                                    userInfo: [DropDownRows: rows])
+                                    userInfo: [DropDownRowsKey: rows])
             
             self.deleteRowsAtIndexPaths(indexPathsForRows, withRowAnimation: animation)
         }
@@ -356,6 +363,7 @@ public extension UITableView {
         return nil
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public var indexPathForSelectedSubrow: NSIndexPath? {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPathForSelectedRow = self.indexPathForSelectedRow {
@@ -395,6 +403,7 @@ public extension UITableView {
         return nil
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public var indexPathsForSelectedSubrows: [NSIndexPath]? {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPathsForSelectedRows = self.indexPathsForSelectedRows {
@@ -431,6 +440,7 @@ public extension UITableView {
         }
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public func selectSubrowAtIndexPath(indexPath: NSIndexPath?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
         
         if let indexPath = indexPath, let dataSource = self.dataSource as? DropDownTableViewDataSource {
@@ -457,6 +467,7 @@ public extension UITableView {
         }
     }
     
+    // NSIndexPath(forSubrow: Int, inMainRow: Int)
     public func deselectSubrowAtIndexPath(indexPath: NSIndexPath, animated: Bool) {
         
         if let dataSource = self.dataSource as? DropDownTableViewDataSource {

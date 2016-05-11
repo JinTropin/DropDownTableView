@@ -1,3 +1,8 @@
+## 0.5.1 (2016-05-11)
+
+- doc updated
+- update some internal functionality
+
 ## 0.5 (2016-05-01)
 
 - API changes
