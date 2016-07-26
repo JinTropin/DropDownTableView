@@ -1,3 +1,11 @@
+## 0.5.3 (2016-07-26)
+
+- fixed crash
+- some internal improvements
+- added required methods in DropDownTableViewDataSource
+
+## 0.5.2 (2016-05-11)
+
 ## 0.5.1 (2016-05-11)
 
 - doc updated

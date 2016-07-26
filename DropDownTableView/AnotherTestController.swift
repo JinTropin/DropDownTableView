@@ -19,23 +19,23 @@ class AnotherTestController: DropDownTableViewController {
         
         self.title = "Another test"
         
-        self.navigationItem.rightBarButtonItem =
-        
-        UIBarButtonItem(barButtonSystemItem: .Done,
-                        target: self,
-                        action: #selector(self.deleteRow(_:)))
+        self.navigationItem.rightBarButtonItems =
+        [UIBarButtonItem(title: "Insert", style: .Plain, target: self, action: #selector(self.insertRows(_:))),
+        UIBarButtonItem(title: "Delete", style: .Plain, target: self, action: #selector(self.deleteRows(_:)))]
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func deleteRow(sender: UIBarButtonItem) {
+    func insertRows(sender: UIBarButtonItem) {
         
         self.numberOfRows += 2
         
         self.tableView.insertRowsAtRows([0, 1], withRowAnimation: .Automatic)
+    }
+    
+    func deleteRows(sender: UIBarButtonItem) {
+        
+        self.numberOfRows -= 2
+        
+        self.tableView.deleteRowsAtRows([0, 1], withRowAnimation: .Automatic)
     }
     
     override func numberOfRowsInTableView(tableView: UITableView) -> Int {

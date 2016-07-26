@@ -8,14 +8,6 @@
 
 import UIKit
 
-// this string contant is used for notify dataSource about rows deletion
-internal let DropDownDeleteRowsNotification = "DropDownDeleteRowsNotification"
-
-// this string contant is used for notify dataSource about rows insertion
-internal let DropDownInsertRowsNotification = "DropDownInsertRowsNotification"
-
-internal let DropDownRowsKey = "DropDownRowsKey"
-
 public extension UITableView {
     
     public func rectForRow(row: Int) -> CGRect {
@@ -253,12 +245,8 @@ public extension UITableView {
         if let dataSource = self.dataSource as? DropDownTableViewDataSource {
             
             let indexPathsForRows = dataSource.tableView(self, indexPathsForRows: rows)
-                        
-            // i know this is workaround. May be it will be reimplemented in future
-            let nc = NSNotificationCenter.defaultCenter()
-            nc.postNotificationName(DropDownInsertRowsNotification,
-                                    object: self,
-                                    userInfo: [DropDownRowsKey: rows])
+            
+            dataSource.dropDownInsertRows(rows)
             
             self.insertRowsAtIndexPaths(indexPathsForRows, withRowAnimation: animation)
         }
@@ -280,11 +268,7 @@ public extension UITableView {
             
             let indexPathsForRows = dataSource.tableView(self, indexPathsForRows: rows)
             
-            // i know this is workaround. May be it will be reimplemented in future
-            let nc = NSNotificationCenter.defaultCenter()
-            nc.postNotificationName(DropDownDeleteRowsNotification,
-                                    object: self,
-                                    userInfo: [DropDownRowsKey: rows])
+            dataSource.dropDownDeleteRows(rows)
             
             self.deleteRowsAtIndexPaths(indexPathsForRows, withRowAnimation: animation)
         }

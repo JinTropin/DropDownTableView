@@ -28,14 +28,21 @@ import UIKit
 ////////////////////////////////////////////////
 
 @available(iOS 8.0, *)
-/*@objc */public protocol DropDownTableViewDataSource : NSObjectProtocol {
+public protocol DropDownTableViewDataSource : NSObjectProtocol {
     
-    func tableView(tableView: UITableView, indexPathsForRows rows: [Int]) -> [NSIndexPath] // [NSIndexPath(forRow:inSection)]
+    /// object must return an array of regular indexpaths [NSIndexPath(forRow:inSection)]
+    func tableView(tableView: UITableView, indexPathsForRows rows: [Int]) -> [NSIndexPath]
     
-    func tableView(tableView: UITableView, indexPathsForSubrows subrows: [Int], inRow row: Int) -> [NSIndexPath] // [NSIndexPath(forRow:inSection)]
+    /// object must return an array of regular indexpaths [NSIndexPath(forRow:inSection)]
+    func tableView(tableView: UITableView, indexPathsForSubrows subrows: [Int], inRow row: Int) -> [NSIndexPath]
     
+    /// some action for row and subrow
     func functionForIndexPath<T>(indexPath: NSIndexPath, functionForRow: (row: Int) -> T, functionForSubrow: (subrow: Int, row: Int) -> T) -> T
     
+    /// implement this method and invoke it while you delete rows manually
+    func dropDownDeleteRows(rows: [Int])
+    /// implement this method and invoke it while you insert rows manually
+    func dropDownInsertRows(rows: [Int])
     
     
     func numberOfRowsInTableView(tableView: UITableView) -> Int // Default is 0
@@ -64,7 +71,7 @@ import UIKit
 }
 
 @available(iOS 8.0, *)
-/*@objc */public protocol DropDownTableViewDelegate : NSObjectProtocol {
+public protocol DropDownTableViewDelegate : NSObjectProtocol {
     
     /*optional*/ func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRow row: Int)
     /*optional*/ func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forSubrow subrow: Int, inRow row: Int)
@@ -144,28 +151,6 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     
     private var selectedRow: Int?
     private var numberOfSubrows = 0
-    
-    public override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self,
-                       selector: #selector(self.dropDownDeleteRows(_:)),
-                       name: DropDownDeleteRowsNotification,
-                       object: self.tableView)
-        nc.addObserver(self,
-                       selector: #selector(self.dropDownInsertRows(_:)),
-                       name: DropDownInsertRowsNotification,
-                       object: self.tableView)
-    }
-    
-    deinit {
-        
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(self, name: DropDownDeleteRowsNotification, object: self.tableView)
-        nc.removeObserver(self, name: DropDownInsertRowsNotification, object: self.tableView)
-    }
     
     override public final func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
@@ -998,12 +983,19 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
                     return subrow
             })
             
-            let targetSubrow = self.tableView(tableView,
-                                              targetSubrowForMoveFromSubrow: sourceSubrow!,
-                                              toProposedSubrow: proposedSubrow!,
-                                              inRow: self.selectedRow!)
-            
-            return NSIndexPath(forRow: targetSubrow + self.selectedRow! + 1, inSection: 0)
+            if proposedSubrow != nil && sourceSubrow != nil {
+                
+                let targetSubrow = self.tableView(tableView,
+                                                  targetSubrowForMoveFromSubrow: sourceSubrow!,
+                                                  toProposedSubrow: proposedSubrow!,
+                                                  inRow: self.selectedRow!)
+                
+                return NSIndexPath(forRow: targetSubrow + self.selectedRow! + 1, inSection: 0)
+                
+            } else {
+                
+                return sourceIndexPath
+            }
         }
     }
     
@@ -1164,15 +1156,10 @@ public extension DropDownTableViewController {
             return functionForRow(row: row - self.numberOfSubrows)
         }
     }
-}
-
-internal extension DropDownTableViewController {
     
-    func dropDownDeleteRows(notification: NSNotification) {
+    func dropDownDeleteRows(rows: [Int]) {
         
         if let selectedRow = self.selectedRow {
-            
-            let rows = notification.userInfo![DropDownRowsKey] as! [Int]
             
             if rows.contains(selectedRow) {
                 
@@ -1189,14 +1176,12 @@ internal extension DropDownTableViewController {
         }
     }
     
-    func dropDownInsertRows(notification: NSNotification) {
+    func dropDownInsertRows(rows: [Int]) {
         
         if let selectedRow = self.selectedRow {
             
-            let rows = notification.userInfo![DropDownRowsKey] as! [Int]
-                
             let count = rows.countIf({ (elem: Int) -> Bool in
-                    
+                
                 elem <= selectedRow
             })
             self.selectedRow! += count
@@ -1214,3 +1199,4 @@ private extension Array where Element: IntegerType {
         }
     }
 }
+// 1216
