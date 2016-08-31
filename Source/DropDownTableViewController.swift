@@ -11,7 +11,7 @@ import UIKit
 ////////////////////////////////////////////////
 //
 // row0 \/      -\
-// row1 \/       | -> one section tableView in fact
+// row1 \/       | -> one section in UITableView
 // row2 \/      -/
 //
 //
@@ -20,7 +20,7 @@ import UIKit
 // row0 /\      -\
 //    subrow0     \
 //    subrow1     |
-//    subrow2     | -> one section tableView in fact
+//    subrow2     | -> one section in UITableView
 //    subrow3     |
 // row1 \/        /
 // row2 \/      -/
@@ -209,33 +209,24 @@ public class DropDownTableViewController: UITableViewController, DropDownTableVi
     override public final func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         return self.functionForIndexPath(indexPath,
-            functionForRow: { (row) -> UITableViewCell in
-                
-                let cellForRow = self.tableView(tableView, cellForRow: row, indexPath: indexPath)
-                
-                let accessoryViewForSelectedRow = self.tableView(tableView, accessoryViewForSelectedRow: row)
-                
-                let accessoryViewForDeselectedRow = self.tableView(tableView, accessoryViewForDeselectedRow: row)
-                
-                if row + 1 == self.selectedRow {
-                    
-                    if accessoryViewForSelectedRow != nil {
-                        
-                        cellForRow.accessoryView = accessoryViewForSelectedRow
-                    }
-                    
-                } else if accessoryViewForDeselectedRow != nil {
-                    
-                    cellForRow.accessoryView = accessoryViewForDeselectedRow
-                }
-                
-                return cellForRow
-                
-            }) { (subrow, row) -> UITableViewCell in
-                
-                let cellForSubrow = self.tableView(tableView, cellForSubrow: subrow, inRow: row, indexPath: indexPath)
-                
-                return cellForSubrow
+                                         functionForRow: { (row) -> UITableViewCell in
+                                            
+                                            let cellForRow = self.tableView(tableView, cellForRow: row, indexPath: indexPath)
+                                            
+                                            if let accessoryViewForSelectedRow = self.tableView(tableView, accessoryViewForSelectedRow: row) where row == self.selectedRow {
+                                                
+                                                cellForRow.accessoryView = accessoryViewForSelectedRow
+                                                
+                                            } else if let accessoryViewForDeselectedRow = self.tableView(tableView, accessoryViewForDeselectedRow: row) {
+                                                
+                                                cellForRow.accessoryView = accessoryViewForDeselectedRow
+                                            }
+                                            
+                                            return cellForRow
+                                            
+        }) { (subrow, row) -> UITableViewCell in
+            
+            return self.tableView(tableView, cellForSubrow: subrow, inRow: row, indexPath: indexPath)
         }
     }
     

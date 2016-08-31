@@ -1,3 +1,7 @@
+## 0.5.4 (2016-07-26)
+
+- small improvement in `cellForRowAtIndexPath`
+
 ## 0.5.3 (2016-07-26)
 
 - fixed crash
