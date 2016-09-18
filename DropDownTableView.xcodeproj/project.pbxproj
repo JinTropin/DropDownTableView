@@ -16,12 +16,12 @@
 		B5BF72321AC30842004A1113 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5BF72301AC30842004A1113 /* LaunchScreen.xib */; };
 		B5CA8DDF1C887F0F002027B1 /* AnotherTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CA8DDE1C887F0F002027B1 /* AnotherTestController.swift */; };
 		B5CBAFD91CB183BC003D5497 /* UITableView+DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBAFD81CB183BC003D5497 /* UITableView+DropDown.swift */; };
-		B5D3529B1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D3529A1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift */; };
+		B5D3529B1CCBA4AA00C021B5 /* IndexPath+DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D3529A1CCBA4AA00C021B5 /* IndexPath+DropDown.swift */; };
 		B5DF89621BEA558A006C1407 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF89611BEA558A006C1407 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B51BA0EF1C8C158F004B821F /* Changelog.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Changelog.md; sourceTree = "<group>"; };
+		B51BA0EF1C8C158F004B821F /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B51BA0F11C8C188A004B821F /* UIAlertController+TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+TextField.swift"; sourceTree = "<group>"; };
 		B5295F831BF8AEA100305D4F /* DropDownTable.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = DropDownTable.gif; sourceTree = "<group>"; };
 		B53586B61C2ECBFB005D58EE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 		B5BF72311AC30842004A1113 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B5CA8DDE1C887F0F002027B1 /* AnotherTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnotherTestController.swift; sourceTree = "<group>"; };
 		B5CBAFD81CB183BC003D5497 /* UITableView+DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+DropDown.swift"; sourceTree = "<group>"; };
-		B5D3529A1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSIndexPath+DropDown.swift"; sourceTree = "<group>"; };
+		B5D3529A1CCBA4AA00C021B5 /* IndexPath+DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IndexPath+DropDown.swift"; sourceTree = "<group>"; };
 		B5DF89611BEA558A006C1407 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,7 +57,7 @@
 			children = (
 				B53FB46D1C2FAB250019DDC9 /* DropDownTableViewController.swift */,
 				B5CBAFD81CB183BC003D5497 /* UITableView+DropDown.swift */,
-				B5D3529A1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift */,
+				B5D3529A1CCBA4AA00C021B5 /* IndexPath+DropDown.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -65,7 +65,7 @@
 		B5BF72191AC30841004A1113 = {
 			isa = PBXGroup;
 			children = (
-				B51BA0EF1C8C158F004B821F /* Changelog.md */,
+				B51BA0EF1C8C158F004B821F /* CHANGELOG.md */,
 				B5ACA02E1C81AAC000350464 /* DropDownTableView.podspec */,
 				B53FB4691C2FA7060019DDC9 /* LICENSE */,
 				B53586DE1C2EF661005D58EE /* README.md */,
@@ -136,11 +136,12 @@
 			attributes = {
 				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = NSSimpleApps;
 				TargetAttributes = {
 					B5BF72211AC30841004A1113 = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -183,7 +184,7 @@
 				B53FB46E1C2FAB250019DDC9 /* DropDownTableViewController.swift in Sources */,
 				B5DF89621BEA558A006C1407 /* TableViewController.swift in Sources */,
 				B5CA8DDF1C887F0F002027B1 /* AnotherTestController.swift in Sources */,
-				B5D3529B1CCBA4AA00C021B5 /* NSIndexPath+DropDown.swift in Sources */,
+				B5D3529B1CCBA4AA00C021B5 /* IndexPath+DropDown.swift in Sources */,
 				B5CBAFD91CB183BC003D5497 /* UITableView+DropDown.swift in Sources */,
 				B53586B71C2ECBFB005D58EE /* TestViewController.swift in Sources */,
 				B51BA0F21C8C188A004B821F /* UIAlertController+TextField.swift in Sources */,
@@ -226,8 +227,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -236,6 +239,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -248,7 +252,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -270,8 +274,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -279,15 +285,17 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -301,6 +309,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "NSSimpleApps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -312,6 +321,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "NSSimpleApps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

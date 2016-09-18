@@ -1,3 +1,8 @@
+## 0.6 (2016-09-18)
+
+- Bump to Swift 3
+- some changes
+
 ## 0.5.4 (2016-07-26)
 
 - small improvement in `cellForRowAtIndexPath`

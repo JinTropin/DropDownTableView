@@ -17,28 +17,20 @@ import Foundation
 // mainrow1 \/
 
 
-public extension NSIndexPath {
+public extension IndexPath {
     
-    public convenience init(forSubrow subrow: Int, inMainRow mainrow: Int) {
+    public init(forSubrow subrow: Int, inMainRow mainrow: Int) {
         
-        self.init(indexes: [subrow, mainrow], length: 2)
+        self.init(indexes: [subrow, mainrow])
     }
     
     public var subrow: Int {
         
-        var result = 0
-        
-        self.getIndexes(&result, range: NSRange(location: 0, length: 1))
-        
-        return result
+        return self[0]
     }
     
     public var mainrow: Int {
         
-        var result = 0
-        
-        self.getIndexes(&result, range: NSRange(location: 1, length: 1))
-        
-        return result
+        return self[1]
     }
 }

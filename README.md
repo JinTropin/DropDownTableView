@@ -1,5 +1,9 @@
 # DropDownTableView
 
+`0.5.*` is for `Swift 2.3`.
+
+`>= 0.6` is for `Swift 3`.
+
 Here is a drop-down TableView. It shows JSON-like data.
 
 Place into Podfile `pod 'DropDownTableView'`

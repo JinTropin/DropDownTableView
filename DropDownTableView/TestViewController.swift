@@ -8,21 +8,21 @@
 
 import UIKit
 
-private extension NSDate {
+private extension Date {
     
     var customDateFormat: String {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d MMM YYYY"
         
-        return dateFormatter.stringFromDate(self)
+        return dateFormatter.string(from: self)
     }
 }
 
 class TestViewController: DropDownTableViewController {
     
-    private var value = 0
-    private var date = NSDate()
+    fileprivate var value = 0
+    fileprivate var date = Date()
     
     override func viewDidLoad() {
         
@@ -30,11 +30,11 @@ class TestViewController: DropDownTableViewController {
 
         self.title = "Test"
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = UserDefaults.standard
         
-        self.value = userDefaults.integerForKey("value")
+        self.value = userDefaults.integer(forKey: "value")
         
-        if let date = userDefaults.objectForKey("date") as? NSDate {
+        if let date = userDefaults.object(forKey: "date") as? Date {
             
             self.date = date
         }
@@ -47,24 +47,24 @@ class TestViewController: DropDownTableViewController {
     
     deinit {
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setInteger(self.value, forKey: "value")
-        userDefaults.setObject(self.date, forKey: "date")
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(self.value, forKey: "value")
+        userDefaults.set(self.date, forKey: "date")
     }
     
-    override func numberOfRowsInTableView(tableView: UITableView) -> Int {
+    override func numberOfRowsInTableView(_ tableView: UITableView) -> Int {
         
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfSubrowsInRow row: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfSubrowsInRow row: Int) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRow row: Int, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         if row == 0 {
             
@@ -79,11 +79,11 @@ class TestViewController: DropDownTableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, cellForSubrow subrow: Int, inRow row: Int, indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForSubrow subrow: Int, inRow row: Int, indexPath: IndexPath) -> UITableViewCell {
         
         if row == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("PickerCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PickerCell", for: indexPath)
             
             // this is dirty hack. Don't do it anymore
             if let pickerView = cell.contentView.subviews.first as? UIPickerView {
@@ -94,7 +94,7 @@ class TestViewController: DropDownTableViewController {
             
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("DateCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DateCell", for: indexPath)
             
             // this is dirty hack. Don't do it anymore
             if let datePicker = cell.contentView.subviews.first as? UIDatePicker {
@@ -105,24 +105,24 @@ class TestViewController: DropDownTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, accessoryViewForSelectedRow row: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, accessoryViewForSelectedRow row: Int) -> UIView? {
         
         return UIImageView(image: UIImage(named: "selectedImage"))
     }
     
-    override func tableView(tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView? {
         
         return UIImageView(image: UIImage(named: "deselectedImage"))
     }
     
     //func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat
     
-    override func tableView(tableView: UITableView, heightForSubrow subrow: Int, inRow row: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForSubrow subrow: Int, inRow row: Int) -> CGFloat {
         
         return 216
     }
     
-    @IBAction func dateChanged(sender: UIDatePicker) {
+    @IBAction func dateChanged(_ sender: UIDatePicker) {
         
         self.date = sender.date
         
@@ -135,12 +135,12 @@ class TestViewController: DropDownTableViewController {
 
 extension TestViewController: UIPickerViewDataSource {
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         return 10
     }
@@ -148,12 +148,12 @@ extension TestViewController: UIPickerViewDataSource {
 
 extension TestViewController: UIPickerViewDelegate {
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return String(row)
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         self.value = row
         
