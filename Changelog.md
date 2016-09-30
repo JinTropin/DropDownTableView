@@ -1,3 +1,9 @@
+## 0.6.1 (2016-10-01)
+
+- old versions removed
+- internal improvements
+- API changes :(
+
 ## 0.6 (2016-09-18)
 
 - Bump to Swift 3

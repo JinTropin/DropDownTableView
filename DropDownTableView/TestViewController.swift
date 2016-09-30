@@ -52,7 +52,7 @@ class TestViewController: DropDownTableViewController {
         userDefaults.set(self.date, forKey: "date")
     }
     
-    override func numberOfRowsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfRows(in tableView: UITableView) -> Int {
         
         return 2
     }
@@ -115,8 +115,6 @@ class TestViewController: DropDownTableViewController {
         return UIImageView(image: UIImage(named: "deselectedImage"))
     }
     
-    //func tableView(tableView: UITableView, heightForRow row: Int) -> CGFloat
-    
     override func tableView(_ tableView: UITableView, heightForSubrow subrow: Int, inRow row: Int) -> CGFloat {
         
         return 216
@@ -126,7 +124,7 @@ class TestViewController: DropDownTableViewController {
         
         self.date = sender.date
         
-        if let cell = self.tableView.cellForRowAtRow(1) {
+        if let cell = self.tableView.cellForRow(at: 1) {
             
             cell.detailTextLabel?.text = self.date.customDateFormat
         }
@@ -157,7 +155,7 @@ extension TestViewController: UIPickerViewDelegate {
         
         self.value = row
         
-        if let cell = self.tableView.cellForRowAtRow(0) {
+        if let cell = self.tableView.cellForRow(at: 0) {
             
             cell.detailTextLabel?.text = String(self.value)
         }

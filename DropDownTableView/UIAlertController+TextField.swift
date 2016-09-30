@@ -7,25 +7,6 @@
 //
 
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 
 extension UIAlertController {
@@ -67,13 +48,13 @@ extension UIAlertController: UITextFieldDelegate {
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if string.characters.count == 0 {
+        if string.isEmpty {
             
-            self.actions.first?.isEnabled = textField.text?.characters.count > 1
+            self.actions.first?.isEnabled = textField.text!.characters.count > 1
             
         } else {
             
-            self.actions.first?.isEnabled = textField.text?.characters.count > 0
+            self.actions.first?.isEnabled = textField.text!.characters.count > 0
         }
         
         return true

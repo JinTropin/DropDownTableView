@@ -10,6 +10,8 @@
 		B51BA0F21C8C188A004B821F /* UIAlertController+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51BA0F11C8C188A004B821F /* UIAlertController+TextField.swift */; };
 		B53586B71C2ECBFB005D58EE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53586B61C2ECBFB005D58EE /* TestViewController.swift */; };
 		B53FB46E1C2FAB250019DDC9 /* DropDownTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53FB46D1C2FAB250019DDC9 /* DropDownTableViewController.swift */; };
+		B5513BD71D996CAD009648A6 /* DropDownTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513BD61D996CAD009648A6 /* DropDownTableViewDataSource.swift */; };
+		B55AAC611D9838C5005DC899 /* DropDownTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AAC601D9838C5005DC899 /* DropDownTableViewDelegate.swift */; };
 		B5BF72281AC30842004A1113 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF72271AC30842004A1113 /* AppDelegate.swift */; };
 		B5BF722D1AC30842004A1113 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722B1AC30842004A1113 /* Main.storyboard */; };
 		B5BF722F1AC30842004A1113 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF722E1AC30842004A1113 /* Images.xcassets */; };
@@ -28,6 +30,8 @@
 		B53586DE1C2EF661005D58EE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		B53FB4691C2FA7060019DDC9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B53FB46D1C2FAB250019DDC9 /* DropDownTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewController.swift; sourceTree = "<group>"; };
+		B5513BD61D996CAD009648A6 /* DropDownTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewDataSource.swift; sourceTree = "<group>"; };
+		B55AAC601D9838C5005DC899 /* DropDownTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewDelegate.swift; sourceTree = "<group>"; };
 		B5ACA02E1C81AAC000350464 /* DropDownTableView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DropDownTableView.podspec; sourceTree = "<group>"; };
 		B5BF72221AC30842004A1113 /* DropDownTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DropDownTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BF72261AC30842004A1113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +62,8 @@
 				B53FB46D1C2FAB250019DDC9 /* DropDownTableViewController.swift */,
 				B5CBAFD81CB183BC003D5497 /* UITableView+DropDown.swift */,
 				B5D3529A1CCBA4AA00C021B5 /* IndexPath+DropDown.swift */,
+				B55AAC601D9838C5005DC899 /* DropDownTableViewDelegate.swift */,
+				B5513BD61D996CAD009648A6 /* DropDownTableViewDataSource.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -182,7 +188,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B53FB46E1C2FAB250019DDC9 /* DropDownTableViewController.swift in Sources */,
+				B5513BD71D996CAD009648A6 /* DropDownTableViewDataSource.swift in Sources */,
 				B5DF89621BEA558A006C1407 /* TableViewController.swift in Sources */,
+				B55AAC611D9838C5005DC899 /* DropDownTableViewDelegate.swift in Sources */,
 				B5CA8DDF1C887F0F002027B1 /* AnotherTestController.swift in Sources */,
 				B5D3529B1CCBA4AA00C021B5 /* IndexPath+DropDown.swift in Sources */,
 				B5CBAFD91CB183BC003D5497 /* UITableView+DropDown.swift in Sources */,

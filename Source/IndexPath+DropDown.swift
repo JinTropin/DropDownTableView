@@ -1,5 +1,5 @@
 //
-//  NSIndexPath+DropDown.swift
+//  IndexPath+DropDown.swift
 //  DropDownTableView
 //
 //  Created by NSSimpleApps on 23.04.16.
@@ -10,10 +10,10 @@ import Foundation
 
 
 // mainrow0 /\
-//    subrow0       -> NSIndexPath(forSubrow: 0, mainrow: 0)
-//    subrow1       -> NSIndexPath(forSubrow: 1, mainrow: 0)
-//    subrow2       -> NSIndexPath(forSubrow: 2, mainrow: 0)
-//    subrow3       -> NSIndexPath(forSubrow: 3, mainrow: 0)
+//    subrow0       -> IndexPath(forSubrow: 0, mainrow: 0)
+//    subrow1       -> IndexPath(forSubrow: 1, mainrow: 0)
+//    subrow2       -> IndexPath(forSubrow: 2, mainrow: 0)
+//    subrow3       -> IndexPath(forSubrow: 3, mainrow: 0)
 // mainrow1 \/
 
 

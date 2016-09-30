@@ -54,13 +54,8 @@ class TableViewController: DropDownTableViewController {
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    override func numberOfRowsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfRows(in tableView: UITableView) -> Int {
         
         return self.data.count
     }
@@ -97,7 +92,7 @@ class TableViewController: DropDownTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, accessoryViewForDeselectedRow row: Int) -> UIView? {
-                
+        
         return UIImageView(image: UIImage(named: "deselectedImage"))
     }
     
@@ -106,7 +101,7 @@ class TableViewController: DropDownTableViewController {
         return 0
     }
     
-    override func tableView(_ tableView: UITableView, indentationLevelForSubrow subrow: Int, inRow: Int) -> Int {
+    override func tableView(_ tableView: UITableView, indentationLevelForSubrow subrow: Int, inRow row: Int) -> Int {
         
         return 3
     }
@@ -127,7 +122,7 @@ class TableViewController: DropDownTableViewController {
             
             self.data.remove(at: row)
             
-            tableView.deleteRowsAtRows([row], withRowAnimation: .automatic)
+            tableView.deleteRows(at: [row], with: .automatic)
             
         } else if editingStyle == .insert {
             
@@ -141,7 +136,7 @@ class TableViewController: DropDownTableViewController {
             
             self.data[row].parameters.removeObject(at: subrow)
             
-            tableView.deleteSubrows([subrow], inRow: row, withRowAnimation: .automatic)
+            tableView.deleteSubrows([subrow], in: row, with: .automatic)
             
         } else if editingStyle == .insert {
             
@@ -152,7 +147,7 @@ class TableViewController: DropDownTableViewController {
                 
                 self.data[row].parameters.insert(Pair(key: key, value: value), at: 0)
                 
-                tableView.insertSubrows([0], inRow: row, withRowAnimation: .automatic)
+                tableView.insertSubrows([0], in: row, with: .automatic)
             })
             
             self.present(alertController, animated: true, completion: nil)
@@ -189,22 +184,22 @@ class TableViewController: DropDownTableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, targetRowForMoveFromRow sourceRow: Int, toProposedRow proposedDestinationRow: Int) -> Int {
+    override func tableView(_ tableView: UITableView, targetRowForMoveFromRow sourceRow: Int, to proposedDestinationRow: Int) -> Int {
         
         return proposedDestinationRow
     }
     
-    override func tableView(_ tableView: UITableView, targetSubrowForMoveFromSubrow sourceSubrow: Int, toProposedSubrow proposedDestinationSubrow: Int, inRow row: Int) -> Int {
+    override func tableView(_ tableView: UITableView, targetSubrowForMoveFromSubrow sourceSubrow: Int, to proposedDestinationSubrow: Int, inRow row: Int) -> Int {
         
         return proposedDestinationSubrow
     }
     
-    override func tableView(_ tableView: UITableView, moveRow sourceRow: Int, toRow destinationRow: Int) {
+    override func tableView(_ tableView: UITableView, moveRow sourceRow: Int, to destinationRow: Int) {
         
         swap(&self.data[sourceRow], &self.data[destinationRow])
     }
     
-    override func tableView(_ tableView: UITableView, moveSubrow sourceSubrow: Int, toSubrow destinationSubrow: Int, inRow row: Int) {
+    override func tableView(_ tableView: UITableView, moveSubrow sourceSubrow: Int, to destinationSubrow: Int, inRow row: Int) {
         
         let state = self.data[row]
         state.parameters.exchangeObject(at: sourceSubrow, withObjectAt: destinationSubrow)

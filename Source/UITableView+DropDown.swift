@@ -10,56 +10,61 @@ import UIKit
 
 public extension UITableView {
     
+    public var dropDownDelegate: DropDownTableViewDelegate? {
+        
+        return self.delegate as? DropDownTableViewDelegate
+    }
+    
+    public var dropDownDataSource: DropDownTableViewDataSource? {
+        
+        return self.dataSource as? DropDownTableViewDataSource
+    }
+    
     public func rectForRow(_ row: Int) -> CGRect {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let indexPathForRow = self.dropDownDataSource?.tableView(self, indexPathsForRows: [row]).first {
             
-            if let indexPathForRow = dataSource.tableView(self, indexPathsForRows: [row]).first {
-                
-                return self.rectForRow(at: indexPathForRow)
-            }
+            return self.rectForRow(at: indexPathForRow)
+        }
+        
+        return CGRect.zero
+    }
+    
+    // IndexPath(forSubrow: Int, inMainRow: Int)
+    public func rectForSubrow(at indexPath: IndexPath) -> CGRect {
+        
+        if let indexPathForSubrow = self.dropDownDataSource?.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
+            
+            return self.rectForRow(at: indexPathForSubrow)
         }
         return CGRect.zero
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
-    public func rectForSubrowAtIndexPath(_ indexPath: IndexPath) -> CGRect {
+    public func row(at point: CGPoint) -> Int? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let indexPath = self.indexPathForRow(at: point) {
             
-            if let indexPathForSubrow = dataSource.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
+            return self.dropDownDataSource?.functionForIndexPath(indexPath, functionForRow: { (row: Int) -> Int in
                 
-                return self.rectForRow(at: indexPathForSubrow)
-            }
-        }
-        return CGRect.zero
-    }
-    
-    public func rowAtPoint(_ point: CGPoint) -> Int? {
-        
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPath = self.indexPathForRow(at: point) {
-            
-            return dataSource.functionForIndexPath(indexPath,
-                                                   functionForRow: { (row: Int) -> Int in
+                return row
                 
-                                                    return row
-                },
-                                                   functionForSubrow: { (subrow, row) -> Int? in
+                }, functionForSubrow: { (subrow, row) -> Int? in
                     
-                                                    return nil
+                    return nil
             })
         }
+        
         return nil
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
-    public func indexPathForSubrowAtPoint(_ point: CGPoint) -> IndexPath? {
+    // IndexPath(forSubrow: Int, inMainRow: Int)
+    public func indexPathForSubrow(at point: CGPoint) -> IndexPath? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPath = self.indexPathForRow(at: point) {
+        if let indexPath = self.indexPathForRow(at: point) {
             
-            return dataSource.functionForIndexPath(indexPath,
+            return self.dropDownDataSource?.functionForIndexPath(indexPath,
                                                    functionForRow: { (row: Int) -> IndexPath? in
-                
+                                                    
                                                     return nil
                 },
                                                    functionForSubrow: { (subrow, row) -> IndexPath in
@@ -67,15 +72,15 @@ public extension UITableView {
                                                     return IndexPath(forSubrow: subrow, inMainRow: row)
             })
         }
+        
         return nil
     }
     
-    
-    public func rowForCell(_ cell: UITableViewCell) -> Int? {
+    public func row(for cell: UITableViewCell) -> Int? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPath = self.indexPath(for: cell) {
+        if let indexPath = self.indexPath(for: cell) {
             
-            return dataSource.functionForIndexPath(indexPath,
+            return self.dropDownDataSource?.functionForIndexPath(indexPath,
                                                    functionForRow: { (row: Int) -> Int in
                                                     
                                                     return row
@@ -88,12 +93,12 @@ public extension UITableView {
         return nil
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
+    // IndexPath(forSubrow: Int, inMainRow: Int)
     public func indexPathForSubrowCell(_ cell: UITableViewCell) -> IndexPath? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPath = self.indexPath(for: cell) {
+        if let indexPath = self.indexPath(for: cell) {
             
-            return dataSource.functionForIndexPath(indexPath,
+            return self.dropDownDataSource?.functionForIndexPath(indexPath,
                                                    functionForRow: { (row: Int) -> IndexPath? in
                                                     
                                                     return nil
@@ -106,13 +111,13 @@ public extension UITableView {
         return nil
     }
     
-    public func rowsInRect(_ rect: CGRect) -> [Int]? {
+    public func rows(in rect: CGRect) -> [Int]? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPaths = self.indexPathsForRows(in: rect) {
+        if let indexPaths = self.indexPathsForRows(in: rect) {
             
             return indexPaths.flatMap({ (indexPath: IndexPath) -> Int? in
                 
-                dataSource.functionForIndexPath(indexPath,
+                self.dropDownDataSource?.functionForIndexPath(indexPath,
                     functionForRow: { (row) -> Int in
                         
                         return row
@@ -126,14 +131,14 @@ public extension UITableView {
         return nil
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
-    public func indexPathsForSubrowsInRect(_ rect: CGRect) -> [IndexPath]? {
+    // IndexPath(forSubrow: Int, inMainRow: Int)
+    public func indexPathsForSubrows(in rect: CGRect) -> [IndexPath]? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPaths = self.indexPathsForRows(in: rect) {
+        if let indexPaths = self.indexPathsForRows(in: rect) {
             
             return indexPaths.flatMap({ (indexPath: IndexPath) -> IndexPath? in
                 
-                dataSource.functionForIndexPath(indexPath,
+                self.dropDownDataSource?.functionForIndexPath(indexPath,
                     functionForRow: { (row) -> IndexPath? in
                         
                         return nil
@@ -147,40 +152,32 @@ public extension UITableView {
         return nil
     }
     
-    public func cellForRowAtRow(_ row: Int) -> UITableViewCell? {
+    public func cellForRow(at row: Int) -> UITableViewCell? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let indexPathForRow = self.dropDownDataSource?.tableView(self, indexPathsForRows: [row]).first {
             
-            if let indexPathForRow = dataSource.tableView(self, indexPathsForRows: [row]).first {
-                
-                return self.cellForRow(at: indexPathForRow)
-            }
+            return self.cellForRow(at: indexPathForRow)
         }
         return nil
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
-    public func cellForSubrowAtIndexPath(_ indexPath: IndexPath) -> UITableViewCell? {
+    // IndexPath(forSubrow: Int, inMainRow: Int)
+    public func cellForSubrow(at indexPath: IndexPath) -> UITableViewCell? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let indexPathForSubrow = self.dropDownDataSource?.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
             
-            if let indexPathForSubrow = dataSource.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
-                
-                return self.cellForRow(at: indexPathForSubrow)
-            }
+            return self.cellForRow(at: indexPathForSubrow)
         }
         return nil
     }
     
     public var visibleRows: [Int]? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource,
-            let indexPathsForVisibleRows = self.indexPathsForVisibleRows {
+        return self.indexPathsForVisibleRows?.flatMap({ (indexPath: IndexPath) -> Int? in
             
-            return indexPathsForVisibleRows.flatMap({ (indexPath: IndexPath) -> Int? in
-                
-                dataSource.functionForIndexPath(indexPath,
-                    functionForRow: { (row: Int) -> Int in
+            self.dropDownDataSource?.functionForIndexPath(indexPath,
+                                                          
+                                                          functionForRow: { (row: Int) -> Int in
                         
                         return row
                         
@@ -188,21 +185,16 @@ public extension UITableView {
                     functionForSubrow: { (subrow, row) -> Int? in
                         
                         return nil
-                })
             })
-        }
-        return nil
+        })
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
+    // IndexPath(forSubrow: Int, inMainRow: Int)
     public var indexPathsForVisibleSubrows: [IndexPath]? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource,
-            let indexPathsForVisibleRows = self.indexPathsForVisibleRows {
-            
-            return indexPathsForVisibleRows.flatMap({ (indexPath: IndexPath) -> IndexPath? in
+        return self.indexPathsForVisibleRows?.flatMap({ (indexPath: IndexPath) -> IndexPath? in
                 
-                dataSource.functionForIndexPath(indexPath,
+            self.dropDownDataSource?.functionForIndexPath(indexPath,
                     functionForRow: { (row: Int) -> IndexPath? in
                         
                         return nil
@@ -213,46 +205,36 @@ public extension UITableView {
                         return IndexPath(forSubrow: subrow, inMainRow: row)
                 })
             })
-        }
-        return nil
     }
     
-    public func scrollToRow(_ row: Int, atScrollPosition scrollPosition: UITableViewScrollPosition, animated: Bool) {
+    public func scrollToRow(at row: Int, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let indexPathForRow = self.dropDownDataSource?.tableView(self, indexPathsForRows: [row]).first {
             
-            if let indexPathForRow = dataSource.tableView(self, indexPathsForRows: [row]).first {
-                
-                self.scrollToRow(at: indexPathForRow, at: scrollPosition, animated: animated)
-            }
+            self.scrollToRow(at: indexPathForRow, at: scrollPosition, animated: animated)
         }
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
-    public func scrollToSubrowAtIndexPath(_ indexPath: IndexPath, atScrollPosition scrollPosition: UITableViewScrollPosition, animated: Bool) {
+    // IndexPath(forSubrow: Int, inMainRow: Int)
+    public func scrollToSubrow(at indexPath: IndexPath, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
-
-            if let indexPathForSubrow = dataSource.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
-                
-                self.scrollToRow(at: indexPathForSubrow, at: scrollPosition, animated: animated)
-            }
+        if let indexPathForSubrow = self.dropDownDataSource?.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
+            
+            self.scrollToRow(at: indexPathForSubrow, at: scrollPosition, animated: animated)
         }
     }
     
-    public func insertRowsAtRows(_ rows: [Int], withRowAnimation animation: UITableViewRowAnimation) {
+    public func insertRows(at rows: [Int], with animation: UITableViewRowAnimation) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
-            
-            let indexPathsForRows = dataSource.tableView(self, indexPathsForRows: rows)
-            
-            dataSource.dropDownInsertRows(rows)
+        if let indexPathsForRows = self.dropDownDataSource?.tableView(self, indexPathsForRows: rows) {
+        
+            self.dropDownDataSource?.dropDownInsertRows(rows, in: self)
             
             self.insertRows(at: indexPathsForRows, with: animation)
         }
     }
     
-    public func insertSubrows(_ subrows: [Int], inRow row: Int, withRowAnimation animation: UITableViewRowAnimation) {
+    public func insertSubrows(_ subrows: [Int], in row: Int, with animation: UITableViewRowAnimation) {
         
         let indexPaths = subrows.map { (subrow: Int) -> IndexPath in
             
@@ -262,19 +244,17 @@ public extension UITableView {
         self.insertRows(at: indexPaths, with: animation)
     }
     
-    public func deleteRowsAtRows(_ rows: [Int], withRowAnimation animation: UITableViewRowAnimation) {
+    public func deleteRows(at rows: [Int], with animation: UITableViewRowAnimation) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let indexPathsForRows = self.dropDownDataSource?.tableView(self, indexPathsForRows: rows) {
             
-            let indexPathsForRows = dataSource.tableView(self, indexPathsForRows: rows)
-            
-            dataSource.dropDownDeleteRows(rows)
+            self.dropDownDataSource?.dropDownDeleteRows(rows, in: self)
             
             self.deleteRows(at: indexPathsForRows, with: animation)
         }
     }
     
-    public func deleteSubrows(_ subrows: [Int], inRow row: Int, withRowAnimation animation: UITableViewRowAnimation) {
+    public func deleteSubrows(_ subrows: [Int], in row: Int, with animation: UITableViewRowAnimation) {
         
         let indexPaths = subrows.map { (subrow: Int) -> IndexPath in
             
@@ -284,47 +264,35 @@ public extension UITableView {
         self.deleteRows(at: indexPaths, with: animation)
     }
     
-    public func reloadRowsAtRows(_ rows: [Int], withRowAnimation animation: UITableViewRowAnimation) {
+    public func reloadRows(at rows: [Int], with animation: UITableViewRowAnimation) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
-            
-            let indexPathsForRows = dataSource.tableView(self, indexPathsForRows: rows)
+        if let indexPathsForRows = self.dropDownDataSource?.tableView(self, indexPathsForRows: rows) {
             
             self.reloadRows(at: indexPathsForRows, with: animation)
         }
     }
     
-    public func reloadSubrows(_ subrows: [Int], inRow row: Int, withRowAnimation animation: UITableViewRowAnimation) {
+    public func reloadSubrows(_ subrows: [Int], in row: Int, with animation: UITableViewRowAnimation) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
-            
-            let indexPathsForSubrows = dataSource.tableView(self, indexPathsForSubrows: subrows, inRow: row)
+        if let indexPathsForSubrows = self.dropDownDataSource?.tableView(self, indexPathsForSubrows: subrows, inRow: row) {
                 
             self.reloadRows(at: indexPathsForSubrows, with: animation)
         }
     }
     
-    public func moveRowAtRow(_ row: Int, toRow newRow: Int) {
+    public func moveRow(at row: Int, to newRow: Int) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
-            
-            let indexPathForRow = dataSource.tableView(self, indexPathsForRows: [row]).first!
-            
-            let indexPathForNewRow = dataSource.tableView(self, indexPathsForRows: [newRow]).first!
+        if let indexPathForRow = self.dropDownDataSource?.tableView(self, indexPathsForRows: [row]).first, let indexPathForNewRow = self.dropDownDataSource?.tableView(self, indexPathsForRows: [newRow]).first {
             
             self.moveRow(at: indexPathForRow, to: indexPathForNewRow)
         }
     }
     
-    public func moveSubrow(_ subrow: Int, toSubrow newSubrow: Int, inRow row: Int) {
+    public func moveSubrow(_ subrow: Int, to newSubrow: Int, in row: Int) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
-            
-            let indexPathsForSubrows = dataSource.tableView(self, indexPathsForSubrows: [subrow, newSubrow], inRow: row)
-            
-            let indexPathForSubrow = indexPathsForSubrows.first!
-            
-            let indexPathForNewSubrow = indexPathsForSubrows.last!
+        let indexPathsForSubrows = self.dropDownDataSource?.tableView(self, indexPathsForSubrows: [subrow, newSubrow], inRow: row)
+        
+        if let indexPathForSubrow = indexPathsForSubrows?.first, let indexPathForNewSubrow = indexPathsForSubrows?.last {
             
             self.moveRow(at: indexPathForSubrow, to: indexPathForNewSubrow)
         }
@@ -332,9 +300,9 @@ public extension UITableView {
     
     public var rowForSelectedRow: Int? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPathForSelectedRow = self.indexPathForSelectedRow {
+        if let indexPathForSelectedRow = self.indexPathForSelectedRow {
             
-            return dataSource.functionForIndexPath(indexPathForSelectedRow,
+            return self.dropDownDataSource?.functionForIndexPath(indexPathForSelectedRow,
                                             functionForRow: { (row) -> Int in
                                                 
                                                 return row
@@ -344,15 +312,16 @@ public extension UITableView {
                                                 return nil
             })
         }
+        
         return nil
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
+    // IndexPath(forSubrow: Int, inMainRow: Int)
     public var indexPathForSelectedSubrow: IndexPath? {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPathForSelectedRow = self.indexPathForSelectedRow {
+        if let indexPathForSelectedRow = self.indexPathForSelectedRow {
             
-            return dataSource.functionForIndexPath(indexPathForSelectedRow,
+            return self.dropDownDataSource?.functionForIndexPath(indexPathForSelectedRow,
                                             functionForRow: { (row) -> IndexPath? in
                                                 
                                                 return nil
@@ -366,73 +335,58 @@ public extension UITableView {
     }
     
     public var rowsForSelectedRows: [Int]? {
-        
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPathsForSelectedRows = self.indexPathsForSelectedRows {
             
-            return indexPathsForSelectedRows.flatMap({ (indexPath: IndexPath) -> Int? in
-                
-                dataSource.functionForIndexPath(indexPath,
-                    functionForRow: { (row) -> Int in
-                        
-                        return row
-                        
-                    },
-                    functionForSubrow: { (subrow, row) -> Int? in
-                        
-                        return nil
-                })
+        return self.indexPathsForSelectedRows?.flatMap({ (indexPath: IndexPath) -> Int? in
+            
+            self.dropDownDataSource?.functionForIndexPath(indexPath,
+                                                          functionForRow: { (row) -> Int in
+                                                            
+                                                            return row
+                                                            
+                },
+                                                          functionForSubrow: { (subrow, row) -> Int? in
+                                                            
+                                                            return nil
             })
-        }
-        
-        return nil
+        })
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
+    // IndexPath(forSubrow: Int, inMainRow: Int)
     public var indexPathsForSelectedSubrows: [IndexPath]? {
-        
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource, let indexPathsForSelectedRows = self.indexPathsForSelectedRows {
             
-            return indexPathsForSelectedRows.flatMap({ (indexPath: IndexPath) -> IndexPath? in
-                
-                dataSource.functionForIndexPath(indexPath,
-                    functionForRow: { (row) -> IndexPath? in
-                        
-                        return nil
-                        
-                    },
-                    functionForSubrow: { (subrow, row) -> IndexPath in
-                        
-                        return IndexPath(forSubrow: subrow, inMainRow: row)
-                })
+        return self.indexPathsForSelectedRows?.flatMap({ (indexPath: IndexPath) -> IndexPath? in
+            
+            self.dropDownDataSource?.functionForIndexPath(indexPath,
+                                                          functionForRow: { (row) -> IndexPath? in
+                                                            
+                                                            return nil
+                                                            
+                },
+                                                          functionForSubrow: { (subrow, row) -> IndexPath in
+                                                            
+                                                            return IndexPath(forSubrow: subrow, inMainRow: row)
             })
-        }
-        return nil
+        })
     }
     
-    public func selectRowAtRow(_ row: Int?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
+    public func selectRowAt(_ row: Int?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
         
-        if let row = row, let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let row = row, let indexPathForRow = self.dropDownDataSource?.tableView(self, indexPathsForRows: [row]).first {
             
-            if let indexPathForRow = dataSource.tableView(self, indexPathsForRows: [row]).first {
-                
-                self.selectRow(at: indexPathForRow, animated: animated, scrollPosition: scrollPosition)
-            }
-            
+            self.selectRow(at: indexPathForRow, animated: animated, scrollPosition: scrollPosition)
+        
         } else {
             
             self.selectRow(at: nil, animated: animated, scrollPosition: scrollPosition)
         }
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
-    public func selectSubrowAtIndexPath(_ indexPath: IndexPath?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
+    // IndexPath(forSubrow: Int, inMainRow: Int)
+    public func selectSubrow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
         
-        if let indexPath = indexPath, let dataSource = self.dataSource as? DropDownTableViewDataSource {
-            
-            if let indexPathForSubrow = dataSource.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
+        if let indexPath = indexPath, let indexPathForSubrow = self.dropDownDataSource?.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
                 
                 self.selectRow(at: indexPathForSubrow, animated: animated, scrollPosition: scrollPosition)
-            }
             
         } else {
             
@@ -440,26 +394,20 @@ public extension UITableView {
         }
     }
     
-    public func deselectRowAtRow(_ row: Int, animated: Bool) {
+    public func deselectRow(at row: Int, animated: Bool) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let indexPathForRow = self.dropDownDataSource?.tableView(self, indexPathsForRows: [row]).first {
             
-            if let indexPathForRow = dataSource.tableView(self, indexPathsForRows: [row]).first {
-                
-                self.deselectRow(at: indexPathForRow, animated: animated)
-            }
+            self.deselectRow(at: indexPathForRow, animated: animated)
         }
     }
     
-    // NSIndexPath(forSubrow: Int, inMainRow: Int)
-    public func deselectSubrowAtIndexPath(_ indexPath: IndexPath, animated: Bool) {
+    // IndexPath(forSubrow: Int, inMainRow: Int)
+    public func deselectSubrow(at indexPath: IndexPath, animated: Bool) {
         
-        if let dataSource = self.dataSource as? DropDownTableViewDataSource {
+        if let indexPathForSubrow = self.dropDownDataSource?.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
             
-            if let indexPathForSubrow = dataSource.tableView(self, indexPathsForSubrows: [indexPath.subrow], inRow: indexPath.mainrow).first {
-                
-                self.deselectRow(at: indexPathForSubrow, animated: animated)
-            }
+            self.deselectRow(at: indexPathForSubrow, animated: animated)
         }
     }
 }
