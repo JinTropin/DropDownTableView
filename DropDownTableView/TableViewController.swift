@@ -68,7 +68,6 @@ class TableViewController: DropDownTableViewController {
     override func tableView(_ tableView: UITableView, cellForRow row: Int, indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RowCell", for: indexPath)
-        
         cell.textLabel?.text = self.data[row].name
         
         return cell
@@ -76,10 +75,9 @@ class TableViewController: DropDownTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForSubrow subrow: Int, inRow row: Int, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SubrowCell", for: indexPath)
-        
         let parameters = self.data[row].parameters.object(at: subrow) as! Pair
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SubrowCell", for: indexPath)
         cell.textLabel?.text = parameters.key
         cell.detailTextLabel?.text = parameters.value
         
@@ -166,12 +164,12 @@ class TableViewController: DropDownTableViewController {
     
     override func tableView(_ tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRow row: Int) {
         
-        print(cell.textLabel?.text, row)
+        print(cell.textLabel?.text ?? "", row)
     }
     
     override func tableView(_ tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forSubrow subrow: Int, inRow row: Int) {
         
-        print(cell.detailTextLabel?.text, row, subrow)
+        print(cell.detailTextLabel?.text ?? "", row, subrow)
     }
     
     override func tableView(_ tableView: UITableView, canMoveRow row: Int) -> Bool {
