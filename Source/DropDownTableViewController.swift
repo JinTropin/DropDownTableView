@@ -378,10 +378,12 @@ open class DropDownTableViewController: UITableViewController {
             
             let count = self.tableView(tableView, numberOfSubrowsInRow: row)
             
+            let animation = self.tableView(tableView, animationForInsertionInRow: row)
+            
             tableView.beginUpdates()
             tableView.insertSubrows(Array(0..<count),
                                     in: row,
-                                    with: .automatic)
+                                    with: animation)
             tableView.endUpdates()
             
             if let cell = tableView.cellForRow(at: row) {
@@ -392,11 +394,13 @@ open class DropDownTableViewController: UITableViewController {
             
         } else if self.selectedRow! == row { // subrows should be deleted from row
             
+            let animation = self.tableView(tableView, animationForDeletionInRow: row)
+            
             self.selectedRow = nil
             tableView.beginUpdates()
             tableView.deleteSubrows(Array(0..<self.numberOfSubrows).reversed(),
                                     in: row,
-                                    with: .automatic)
+                                    with: animation)
             tableView.endUpdates()
             
             if let cell = tableView.cellForRow(at: row) {
@@ -410,10 +414,12 @@ open class DropDownTableViewController: UITableViewController {
             let deselectedRow = self.selectedRow!
             self.selectedRow = nil
             
+            let animationForDeletion = self.tableView(tableView, animationForDeletionInRow: deselectedRow)
+            
             tableView.beginUpdates()
             tableView.deleteSubrows(Array(0..<self.numberOfSubrows).reversed(),
                                     in: deselectedRow,
-                                    with: .automatic)
+                                    with: animationForDeletion)
             tableView.endUpdates()
             
             if let cell = tableView.cellForRow(at: deselectedRow) {
@@ -428,10 +434,12 @@ open class DropDownTableViewController: UITableViewController {
             self.selectedRow = row
             let count = self.tableView(tableView, numberOfSubrowsInRow: row)
             
+            let animationForInsertion = self.tableView(tableView, animationForDeletionInRow: row)
+            
             tableView.beginUpdates()
             tableView.insertSubrows(Array(0..<count),
                                     in: row,
-                                    with: .automatic)
+                                    with: animationForInsertion)
             tableView.endUpdates()
             
             if let cell = tableView.cellForRow(at: row) {

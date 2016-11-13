@@ -32,6 +32,9 @@ public protocol DropDownTableViewDataSource : NSObjectProtocol {
     func tableView(_ tableView: UITableView, cellForRow row: Int, indexPath: IndexPath) -> UITableViewCell
     func tableView(_ tableView: UITableView, cellForSubrow subrow: Int, inRow row: Int, indexPath: IndexPath) -> UITableViewCell
     
+    /*optional*/ func tableView(_ tableView: UITableView, animationForInsertionInRow row: Int) -> UITableViewRowAnimation // default is .automatic
+    /*optional*/ func tableView(_ tableView: UITableView, animationForDeletionInRow row: Int) -> UITableViewRowAnimation // default is .automatic
+    
     /*optional*/ func titleForHeader(in tableView: UITableView) -> String?
     /*optional*/ func titleForFooter(in tableView: UITableView) -> String?
     
@@ -52,6 +55,16 @@ public protocol DropDownTableViewDataSource : NSObjectProtocol {
 }
 
 extension DropDownTableViewController: DropDownTableViewDataSource {
+    
+    public func tableView(_ tableView: UITableView, animationForInsertionInRow row: Int) -> UITableViewRowAnimation {
+        
+        return .automatic
+    }
+    
+    public func tableView(_ tableView: UITableView, animationForDeletionInRow row: Int) -> UITableViewRowAnimation {
+        
+        return .automatic
+    }
     
     open func tableView(_ tableView: UITableView, numberOfSubrowsInRow row: Int) -> Int {
         

@@ -202,4 +202,14 @@ class TableViewController: DropDownTableViewController {
         let state = self.data[row]
         state.parameters.exchangeObject(at: sourceSubrow, withObjectAt: destinationSubrow)
     }
+    
+    override func tableView(_ tableView: UITableView, animationForInsertionInRow row: Int) -> UITableViewRowAnimation {
+        
+        return .right
+    }
+    
+    override func tableView(_ tableView: UITableView, animationForDeletionInRow row: Int) -> UITableViewRowAnimation {
+        
+        return .left
+    }
 }

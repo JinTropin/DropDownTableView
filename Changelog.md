@@ -1,3 +1,8 @@
+## 0.6.2 (2016-11-13)
+
+- added methods for animation when deletion and insertion
+- TODO: multi-row support
+
 ## 0.6.1 (2016-10-01)
 
 - old versions removed
